@@ -46,3 +46,12 @@ install(FILES
 
 # Allow linking via BareMetalLib::bml when BML is a subproject.
 add_library(BareMetalLib::bml ALIAS bml)
+
+# Bring in tests if they're enabled.
+option(BML_BUILD_TESTS "Build BareMetalLib tests.")
+mark_as_advanced(BML_BUILD_TESTS)
+
+if(BML_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
