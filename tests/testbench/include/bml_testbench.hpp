@@ -56,4 +56,21 @@ namespace bmltb
             bmltb::puts("Assert failed (line " BMLTB_LINE_NUM "): " #condition); \
             return 1;                                                            \
         }
+    
+    //
+    // A simplified version of std::is_same that doesn't depend on integral_constant.
+    //
+    // Template arguments:
+    // T, U - Types to check.
+    //
+    template <typename T, typename U> struct is_same       { static constexpr auto value = false; };
+    template <typename T>             struct is_same<T, T> { static constexpr auto value = true; };
+
+    //
+    // Commonly used test types.
+    //
+    class      class_type { public: int x; char y[3]; };
+    enum class enum_class { x, y };
+    union      union_type { int x; char y[3]; };
+    class      incomplete_class;
 }

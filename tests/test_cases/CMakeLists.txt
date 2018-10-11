@@ -46,3 +46,6 @@ function(bml_add_compile_failure_test test_name source_file)
         set_tests_properties(${test_name} PROPERTIES WILL_FAIL TRUE)
     endif()
 endfunction()
+
+# Start adding tests.
+add_subdirectory(type_traits)
