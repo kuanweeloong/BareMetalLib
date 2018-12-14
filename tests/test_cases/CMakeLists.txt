@@ -48,4 +48,5 @@ function(bml_add_compile_failure_test test_name source_file)
 endfunction()
 
 # Start adding tests.
+add_subdirectory(detail)
 add_subdirectory(type_traits)

@@ -25,7 +25,7 @@ BML requires a C++17 conforming compiler. It is tested on the following platform
 
 | OS                 | Architecture | Compiler    |
 | ------------------ | ------------ | ----------- |
-| Ubuntu 18.04.1 LTS | x64          | GCC 7.3.0   |
+| Ubuntu 18.04.1 LTS | x64          | GCC 8.2.0   |
 | Ubuntu 18.04.1 LTS | x64          | Clang 6.0.0 |
 
 ## License
