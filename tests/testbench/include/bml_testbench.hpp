@@ -48,13 +48,13 @@ namespace bmltb
     // and abort the caller by making it return 1.
     //
     // Arguments:
-    // condition - Condition to assert.
+    // <Variable arguments> - Condition to assert.
     //
-    #define bmltb_assert(condition...)                                           \
-        if (!(condition))                                                        \
-        {                                                                        \
-            bmltb::puts("Assert failed (line " BMLTB_LINE_NUM "): " #condition); \
-            return 1;                                                            \
+    #define bmltb_assert(...)                                                      \
+        if (!(__VA_ARGS__))                                                        \
+        {                                                                          \
+            bmltb::puts("Assert failed (line " BMLTB_LINE_NUM "): " #__VA_ARGS__); \
+            return 1;                                                              \
         }
     
     //
