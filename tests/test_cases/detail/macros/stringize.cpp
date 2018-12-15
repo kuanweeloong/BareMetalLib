@@ -16,7 +16,7 @@ auto test_main() noexcept -> int
 {
     // Check that the contents of stringize's output matches the input.
     {
-        auto const& test_string = BML_STRINGIZE(A_B);
+        constexpr auto& test_string = BML_STRINGIZE(A_B);
         static_assert(test_string[0] == 'a');
         static_assert(test_string[1] == ' ');
         static_assert(test_string[2] == 'b');
@@ -25,7 +25,7 @@ auto test_main() noexcept -> int
     
     // Check that stringize converts multiple arguments to a single string.
     {
-        auto const& test_string = BML_STRINGIZE(A, B);
+        constexpr auto& test_string = BML_STRINGIZE(A, B);
         static_assert(test_string[0] == 'a');
         static_assert(test_string[1] == ',');
         static_assert(test_string[2] == ' ');
