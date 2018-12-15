@@ -35,10 +35,10 @@ auto test_main() noexcept -> int
     // Check that BMLTB_LINE_NUM contains the stringified line number.
     {
         // There's probably a better way to do this...
-        auto& line = BMLTB_LINE_NUM;
+        constexpr auto& line = BMLTB_LINE_NUM;
         static_assert(line[0] == '3' && line[1] == '8' && line[2] == '\0');
 
-        auto& line2 = BMLTB_LINE_NUM;
+        constexpr auto& line2 = BMLTB_LINE_NUM;
         static_assert(line2[0] == '4' && line2[1] == '1' && line2[2] == '\0');
     }
     
