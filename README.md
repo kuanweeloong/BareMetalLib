@@ -1,4 +1,7 @@
 # BareMetalLib
+[![Build Status](
+    https://travis-ci.org/kuanweeloong/BareMetalLib.svg?branch=master)](
+    https://travis-ci.org/kuanweeloong/BareMetalLib)
 
 ## Introduction
 BareMetalLib (BML) is an experimental, modern C++, header-only support library for bare-metal
@@ -23,10 +26,12 @@ patient!
 ## Requirements
 BML requires a C++17 conforming compiler. It is tested on the following platforms:
 
-| OS                 | Architecture | Compiler    |
-| ------------------ | ------------ | ----------- |
-| Ubuntu 18.04.1 LTS | x64          | GCC 8.2.0   |
-| Ubuntu 18.04.1 LTS | x64          | Clang 6.0.0 |
+| OS                 | Architecture | Compiler    | Remarks       |
+| ------------------ | ------------ | ----------- | ------------- |
+| Ubuntu 18.04.1 LTS | x64          | GCC 8.2.0   |               |
+| Ubuntu 18.04.1 LTS | x64          | Clang 6.0.0 |               |
+| Ubuntu 16.04.5 LTS | x64          | GCC 8.1.0   | Via Travis CI |
+| Ubuntu 16.04.5 LTS | x64          | Clang 6.0.1 | Via Travis CI |
 
 ## License
 BML is licensed under the MIT license. For more details, see [LICENSE.md](LICENSE.md).

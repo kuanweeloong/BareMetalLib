@@ -1,0 +1,49 @@
+#
+# Copyright (c) 2019 Wee Loong Kuan
+#
+# This file is licensed under the MIT license. For more details, see the LICENSE.md file in the
+# top-level directory of this distribution.
+#
+
+language: cpp
+
+matrix:
+  include:
+    # GCC
+    - os: linux
+      dist: xenial
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+    
+    # Clang
+    - os: linux
+      dist: xenial
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-6.0
+          packages:
+            - clang-6.0
+      env:
+        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+
+script:
+  - cmake --version
+  - ${CXX} -v
+  
+  - mkdir build
+  - cd build
+  - cmake -DBML_BUILD_TESTS=ON ..
+  - make
+  - ctest
