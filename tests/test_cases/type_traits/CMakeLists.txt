@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018 Wee Loong Kuan
+# Copyright (c) 2019 Wee Loong Kuan
 #
 # This file is licensed under the MIT license. For more details, see the LICENSE.md file in the
 # top-level directory of this distribution.
@@ -21,3 +21,4 @@ bml_add_test("type_traits.conditional" conditional.cpp)
 bml_add_test("type_traits.is_constructible" is_constructible.cpp)
 bml_add_test("type_traits.is_default_constructible" is_default_constructible.cpp)
 bml_add_test("type_traits.detected_or" detected_or.cpp)
+bml_add_test("type_traits.is_aggregate" is_aggregate.cpp)
