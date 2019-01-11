@@ -23,3 +23,4 @@ bml_add_test("type_traits.is_default_constructible" is_default_constructible.cpp
 bml_add_test("type_traits.detected_or" detected_or.cpp)
 bml_add_test("type_traits.is_aggregate" is_aggregate.cpp)
 bml_add_test("type_traits.is_detected" is_detected.cpp)
+bml_add_test("type_traits.detected_ty" detected_ty.cpp)
