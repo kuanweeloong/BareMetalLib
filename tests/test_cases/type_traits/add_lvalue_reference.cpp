@@ -57,6 +57,9 @@ auto test_main() noexcept -> int
     // not referenceable.
     {
         check_result<void, void>();
+        check_result<void const, void const>();
+        check_result<void volatile, void volatile>();
+        check_result<void const volatile, void const volatile>();
         
         check_result<auto () & -> void, auto () & -> void>();
         check_result<auto () & noexcept -> void, auto () & noexcept -> void>();
