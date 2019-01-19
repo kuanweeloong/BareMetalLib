@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Wee Loong Kuan
+// Copyright (c) 2019 Wee Loong Kuan
 //
 // This file is licensed under the MIT license. For more details, see the LICENSE.md file in the
 // top-level directory of this distribution.
@@ -81,6 +81,10 @@ auto test_main() noexcept -> int
         check_constructible<int, int>();
         check_constructible<int, int const>();
         
+        check_constructible<int[2]>();
+        check_constructible<int[2][3]>();
+        check_constructible<int[2][3][5]>();
+        
         check_constructible<int&, int&>();
         check_constructible<int const&, int>();
         check_constructible<int const&, int&&>();
@@ -135,6 +139,10 @@ auto test_main() noexcept -> int
     // Check that the result is false when the 1st type is not constructible from the remaining
     // type.
     {
+        check_not_constructible<int[]>();
+        check_not_constructible<int[][3]>();
+        check_not_constructible<int[][3][5]>();
+        
         check_not_constructible<test_struct>();
         check_not_constructible<test_struct, char>();
         check_not_constructible<test_struct, void>();

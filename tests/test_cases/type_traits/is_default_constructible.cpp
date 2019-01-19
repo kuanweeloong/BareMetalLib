@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 Wee Loong Kuan
+// Copyright (c) 2019 Wee Loong Kuan
 //
 // This file is licensed under the MIT license. For more details, see the LICENSE.md file in the
 // top-level directory of this distribution.
@@ -77,6 +77,7 @@ auto test_main() noexcept -> int
         check_default_constructible<int const*>();
         check_default_constructible<char[3]>();
         check_default_constructible<char[5][3]>();
+        check_default_constructible<char[5][3][2]>();
         
         check_default_constructible<bmltb::class_type>();
         check_default_constructible<bmltb::enum_class>();
@@ -93,6 +94,7 @@ auto test_main() noexcept -> int
         check_not_default_constructible<int&&>();
         check_not_default_constructible<char[]>();
         check_not_default_constructible<char[][3]>();
+        check_not_default_constructible<char[][3][5]>();
         
         check_not_default_constructible<abstract>();
         check_not_default_constructible<no_default_ctor>();
