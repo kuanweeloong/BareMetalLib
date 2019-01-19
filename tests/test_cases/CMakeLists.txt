@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018 Wee Loong Kuan
+# Copyright (c) 2019 Wee Loong Kuan
 #
 # This file is licensed under the MIT license. For more details, see the LICENSE.md file in the
 # top-level directory of this distribution.
@@ -50,3 +50,4 @@ endfunction()
 # Start adding tests.
 add_subdirectory(detail)
 add_subdirectory(type_traits)
+add_subdirectory(utilities)
