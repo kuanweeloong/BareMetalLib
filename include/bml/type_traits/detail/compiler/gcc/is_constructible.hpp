@@ -6,6 +6,7 @@
 //
 
 #pragma once
+#include <stddef.h>
 #include "../../../bool_constant.hpp"
 #include "../../../true_type.hpp"
 #include "../../../false_type.hpp"
