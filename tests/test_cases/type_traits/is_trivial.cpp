@@ -67,15 +67,14 @@ auto test_main() noexcept -> int
         check_trivial<int*>();
         check_trivial<int const*>();
         check_trivial<char[3]>();
-        check_trivial<char[]>();
         check_trivial<char(*)[]>();
         
         check_trivial<bmltb::enum_class>();
         check_trivial<trivial_class>();
-        check_trivial<bmltb::union_type[]>();
+        check_trivial<bmltb::union_type[2]>();
         check_trivial<int bmltb::class_type::*>();
         check_trivial<bmltb::incomplete_class*>();
-        check_trivial<bmltb::incomplete_class*[][2]>();
+        check_trivial<bmltb::incomplete_class*[3][2]>();
         check_trivial<non_standard_trivial_class>();
         
         check_trivial<auto (*)(int) noexcept -> void>();
@@ -85,6 +84,7 @@ auto test_main() noexcept -> int
     
     // Check that the result is false when the input is not a trivial type.
     {
+        check_not_trivial<void>();
         check_not_trivial<int&>();
         check_not_trivial<int const&>();
         check_not_trivial<int&&>();
