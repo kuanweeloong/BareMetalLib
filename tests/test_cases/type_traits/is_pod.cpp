@@ -56,15 +56,14 @@ auto test_main() noexcept -> int
         check_pod<int*>();
         check_pod<int const*>();
         check_pod<char[3]>();
-        check_pod<char[]>();
         check_pod<char(*)[]>();
         
         check_pod<bmltb::enum_class>();
         check_pod<trivial_class>();
-        check_pod<bmltb::union_type[]>();
+        check_pod<bmltb::union_type[2]>();
         check_pod<int bmltb::class_type::*>();
         check_pod<bmltb::incomplete_class*>();
-        check_pod<bmltb::incomplete_class*[][2]>();
+        check_pod<bmltb::incomplete_class*[1][2]>();
         
         check_pod<auto (*)(int) noexcept -> void>();
         check_pod<auto (bmltb::class_type::*)() -> void>();
@@ -73,6 +72,7 @@ auto test_main() noexcept -> int
     
     // Check that the result is false when the input is not a POD type.
     {
+        check_not_pod<void>();
         check_not_pod<int&>();
         check_not_pod<int const&>();
         check_not_pod<int&&>();
