@@ -15,7 +15,7 @@ namespace bml
     // See std::is_base_of.
     //
     template <typename Base, typename Derived>
-    struct is_base_of : detail::is_base_of_detail::impl<Base, Derived>{};
+    struct is_base_of : detail::is_base_of_detail::impl<Base, Derived> {};
 
     //
     // See std::is_base_of_v.

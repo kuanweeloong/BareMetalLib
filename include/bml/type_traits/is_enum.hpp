@@ -15,7 +15,7 @@ namespace bml
     // See std::is_enum.
     //
     template <typename T>
-    struct is_enum : detail::is_enum_detail::impl<T>{};
+    struct is_enum : detail::is_enum_detail::impl<T> {};
 
     //
     // See std::is_enum_v.

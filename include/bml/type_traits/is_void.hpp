@@ -25,7 +25,7 @@ namespace bml
     // See std::is_void.
     //
     template <typename T>
-    struct is_void : detail::is_void_detail::impl<remove_cv_ty<T>>{};
+    struct is_void : detail::is_void_detail::impl<remove_cv_ty<T>> {};
 
     //
     // See std::is_void_v.

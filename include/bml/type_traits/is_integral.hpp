@@ -40,7 +40,7 @@ namespace bml
     // specialize is_integral if they need support for such types.
     //
     template <typename T>
-    struct is_integral : detail::is_integral_detail::impl<remove_cv_ty<T>>{};
+    struct is_integral : detail::is_integral_detail::impl<remove_cv_ty<T>> {};
 
     //
     // See std::is_integral_v.

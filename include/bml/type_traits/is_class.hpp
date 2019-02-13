@@ -15,7 +15,7 @@ namespace bml
     // See std::is_class.
     //
     template <typename T>
-    struct is_class : detail::is_class_detail::impl<T>{};
+    struct is_class : detail::is_class_detail::impl<T> {};
 
     //
     // See std::is_class_v.

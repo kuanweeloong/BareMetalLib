@@ -15,7 +15,7 @@ namespace bml
     // See std::is_aggregate.
     //
     template <typename T>
-    struct is_aggregate : detail::is_aggregate_detail::impl<T>{};
+    struct is_aggregate : detail::is_aggregate_detail::impl<T> {};
 
     //
     // See std::is_aggregate_v.

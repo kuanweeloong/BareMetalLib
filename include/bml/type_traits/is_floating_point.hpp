@@ -25,7 +25,7 @@ namespace bml
     // See std::is_floating_point
     //
     template <typename T>
-    struct is_floating_point : detail::is_floating_point_detail::impl<remove_cv_ty<T>>{};
+    struct is_floating_point : detail::is_floating_point_detail::impl<remove_cv_ty<T>> {};
 
     //
     // See std::is_floating_point_v.

@@ -15,7 +15,7 @@ namespace bml
     // See std::is_union.
     //
     template <typename T>
-    struct is_union : detail::is_union_detail::impl<T>{};
+    struct is_union : detail::is_union_detail::impl<T> {};
 
     //
     // See std::is_union_v.

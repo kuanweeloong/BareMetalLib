@@ -15,7 +15,7 @@ namespace bml
     // See std::is_standard_layout.
     //
     template <typename T>
-    struct is_standard_layout : detail::is_standard_layout_detail::impl<T>{};
+    struct is_standard_layout : detail::is_standard_layout_detail::impl<T> {};
 
     //
     // See std::is_standard_layout_v.

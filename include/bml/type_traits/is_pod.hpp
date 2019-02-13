@@ -15,7 +15,7 @@ namespace bml
     // See std::is_pod.
     //
     template <typename T>
-    struct is_pod : detail::is_pod_detail::impl<T>{};
+    struct is_pod : detail::is_pod_detail::impl<T> {};
 
     //
     // See std::is_pod_v.

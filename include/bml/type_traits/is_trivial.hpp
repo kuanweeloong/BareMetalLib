@@ -15,7 +15,7 @@ namespace bml
     // See std::is_trivial.
     //
     template <typename T>
-    struct is_trivial : detail::is_trivial_detail::impl<T>{};
+    struct is_trivial : detail::is_trivial_detail::impl<T> {};
 
     //
     // See std::is_trivial_v.
