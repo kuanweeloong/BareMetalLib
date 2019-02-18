@@ -63,3 +63,4 @@ bml_add_test("type_traits.is_member_function_pointer" is_member_function_pointer
 bml_add_test("type_traits.is_member_object_pointer" is_member_object_pointer.cpp)
 bml_add_test("type_traits.is_empty" is_empty.cpp)
 bml_add_test("type_traits.is_pointer" is_pointer.cpp)
+bml_add_test("type_traits.is_scalar" is_scalar.cpp)
