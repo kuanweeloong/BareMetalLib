@@ -137,7 +137,7 @@ auto test_main() noexcept -> int
     }
     
     // Check that the result is false when the 1st type is not constructible from the remaining
-    // type.
+    // types.
     {
         check_not_constructible<int[]>();
         check_not_constructible<int[][3]>();
