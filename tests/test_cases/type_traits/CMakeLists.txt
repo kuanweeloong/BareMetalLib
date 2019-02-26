@@ -74,3 +74,4 @@ bml_add_test("type_traits.is_trivially_assignable" is_trivially_assignable.cpp)
 bml_add_test("type_traits.is_trivially_copyable" is_trivially_copyable.cpp)
 bml_add_test("type_traits.is_trivially_default_constructible"
     is_trivially_default_constructible.cpp)
+bml_add_test("type_traits.is_trivially_copy_constructible" is_trivially_copy_constructible.cpp)
