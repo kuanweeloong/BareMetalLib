@@ -67,6 +67,11 @@ class abstract_dtor
     virtual ~abstract_dtor() = 0;
 };
 
+struct defaulted_copy
+{
+    defaulted_copy(defaulted_copy const&) = default;
+};
+
 auto test_main() noexcept -> int
 {
     // Check that the result is true when the input type is trivially copy constructible.
@@ -80,8 +85,9 @@ auto test_main() noexcept -> int
         check_trivially_copy_constructible<double>();
         
         check_trivially_copy_constructible<empty>();
-        check_trivially_copy_constructible<bmltb::enum_class>();
         check_trivially_copy_constructible<empty_union>();
+        check_trivially_copy_constructible<defaulted_copy>();
+        check_trivially_copy_constructible<bmltb::enum_class>();
         check_trivially_copy_constructible<bmltb::incomplete_class*>();
         
         check_trivially_copy_constructible<int bmltb::class_type::*>();
