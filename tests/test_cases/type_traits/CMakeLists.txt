@@ -79,3 +79,4 @@ bml_add_test("type_traits.is_trivially_move_constructible" is_trivially_move_con
 bml_add_test("type_traits.is_trivially_copy_assignable" is_trivially_copy_assignable.cpp)
 bml_add_test("type_traits.is_trivially_move_assignable" is_trivially_move_assignable.cpp)
 bml_add_test("type_traits.is_array_of_unknown_bound" is_array_of_unknown_bound.cpp)
+bml_add_test("type_traits.is_destructible" is_destructible.cpp)
