@@ -78,6 +78,8 @@ auto test_main() noexcept -> int
         check_not_polymorphic<non_virt_derived>();
         check_not_polymorphic<final_class>();
         check_not_polymorphic<bmltb::enum_class>();
+        check_not_polymorphic<bmltb::class_type>();
+        check_not_polymorphic<bmltb::union_type>();
         check_not_polymorphic<bmltb::union_type[2]>();
         check_not_polymorphic<int bmltb::class_type::*>();
         check_not_polymorphic<bmltb::incomplete_class*>();
