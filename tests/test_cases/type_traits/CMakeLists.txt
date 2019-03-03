@@ -84,3 +84,4 @@ bml_add_test("type_traits.is_trivially_destructible" is_trivially_destructible.c
 bml_add_test("type_traits.is_polymorphic" is_polymorphic.cpp)
 bml_add_test("type_traits.is_abstract" is_abstract.cpp)
 bml_add_test("type_traits.is_final" is_final.cpp)
+bml_add_test("type_traits.has_virtual_destructor" has_virtual_destructor.cpp)
