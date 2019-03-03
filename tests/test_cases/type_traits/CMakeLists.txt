@@ -82,3 +82,4 @@ bml_add_test("type_traits.is_array_of_unknown_bound" is_array_of_unknown_bound.c
 bml_add_test("type_traits.is_destructible" is_destructible.cpp)
 bml_add_test("type_traits.is_trivially_destructible" is_trivially_destructible.cpp)
 bml_add_test("type_traits.is_polymorphic" is_polymorphic.cpp)
+bml_add_test("type_traits.is_abstract" is_abstract.cpp)
