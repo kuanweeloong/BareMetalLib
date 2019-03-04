@@ -83,7 +83,7 @@ struct d : private b1, private b2 {};
 
 auto test_main() noexcept -> int
 {
-    // Check that the result is true when the 2nd type is derived from the 1st rype.
+    // Check that the result is true when the 2nd type is derived from the 1st type.
     {
         check_base_of<b, d>();
         check_base_of<b1, d>();
@@ -93,7 +93,7 @@ auto test_main() noexcept -> int
         check_base_of<b, b>();
     }
     
-    // Check that the result is true when the 2nd type is not derived from the 1st rype.
+    // Check that the result is false when the 2nd type is not derived from the 1st type.
     {
         check_not_base_of<d, b>();
         check_not_base_of<bmltb::class_type, b>();
