@@ -8,7 +8,7 @@ BareMetalLib (BML) is an experimental, modern C++, header-only support library f
 programming. It aims to provide functionality similar to that of the C++ standard library, but in a
 form more suited to bare-metal code. To this end, BML eschews the use of:
 
-- Headers from the C and C++ standard libraries, except for C99 freestanding headers
+- Headers from the C and C++ standard libraries, except for C11 freestanding headers
 - Exceptions (By design, BML is `noexcept` throughout and provides no exception guarantees.)
 - RTTI
 - Thread-local storage
