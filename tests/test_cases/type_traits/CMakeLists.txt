@@ -93,3 +93,4 @@ bml_add_test("type_traits.has_unique_object_representations" has_unique_object_r
 bml_add_test("type_traits.type_identity" type_identity.cpp)
 bml_add_test("type_traits.decay" decay.cpp)
 bml_add_test("type_traits.aligned_storage" aligned_storage.cpp)
+bml_add_test("type_traits.aligned_union" aligned_union.cpp)
