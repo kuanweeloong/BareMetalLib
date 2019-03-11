@@ -14,3 +14,4 @@ bml_add_compile_failure_test("utilities.forward.fail.lvalue_arg_cv_mismatch"
 bml_add_compile_failure_test("utilities.forward.fail.rvalue_arg_cv_mismatch"
     forward.fail.rvalue_arg_cv_mismatch.cpp)
 bml_add_compile_failure_test("utilities.forward.fail.missing_t" forward.fail.missing_t.cpp)
+bml_add_test("utilities.max" max.cpp)
