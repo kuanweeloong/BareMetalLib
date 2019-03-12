@@ -18,3 +18,6 @@ bml_add_test("utilities.max" max.cpp)
 bml_add_test("utilities.move" move.cpp)
 bml_add_compile_failure_test("utilities.move.fail.move_unmovable" move.fail.move_unmovable.cpp)
 bml_add_test("utilities.min" min.cpp)
+bml_add_test("utilities.addressof" addressof.cpp)
+bml_add_compile_failure_test("utilities.addressof.fail.rvalue_address"
+    addressof.fail.rvalue_address.cpp)
