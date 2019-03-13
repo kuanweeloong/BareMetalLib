@@ -8,4 +8,4 @@
 target_compile_options(bml_testbench PUBLIC
     -ffreestanding -nostdinc++ -fno-rtti -fno-exceptions -Wall -Wextra)
 
-target_link_libraries(bml_testbench PUBLIC -nostdlib -lgcc)
+target_link_libraries(bml_testbench PUBLIC gcc -nostdlib)
