@@ -21,3 +21,4 @@ bml_add_test("utilities.min" min.cpp)
 bml_add_test("utilities.addressof" addressof.cpp)
 bml_add_compile_failure_test("utilities.addressof.fail.rvalue_address"
     addressof.fail.rvalue_address.cpp)
+bml_add_test("utilities.new" new.cpp)
