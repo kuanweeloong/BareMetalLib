@@ -22,3 +22,8 @@ bml_add_test("utilities.addressof" addressof.cpp)
 bml_add_compile_failure_test("utilities.addressof.fail.rvalue_address"
     addressof.fail.rvalue_address.cpp)
 bml_add_test("utilities.new" new.cpp)
+bml_add_test("utilities.launder" launder.cpp)
+bml_add_compile_failure_test("utilities.launder.fail.launder_function"
+    launder.fail.launder_function.cpp "Cannot launder function.")
+bml_add_compile_failure_test("utilities.launder.fail.launder_void" launder.fail.launder_void.cpp
+    "Cannot launder void.")
