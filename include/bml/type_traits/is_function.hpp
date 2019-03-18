@@ -14,19 +14,17 @@
 #include "is_void.hpp"
 #include "is_reference.hpp"
 #include "is_null_pointer.hpp"
+#include "is_referenceable.hpp"
 
 namespace bml
 {
     namespace detail::is_function_detail
     {
         template <typename T>
-        using referenced_type = T&;
-
-        template <typename T>
         constexpr auto decay_check(T*) noexcept -> void;
 
         template <typename T>
-        using ref_decays_to_pointer = decltype(decay_check<T>(declval<T&>()));
+        using ref_decays_to_pointer = decltype(is_function_detail::decay_check<T>(declval<T&>()));
         
         template <typename T>
         constexpr auto check() noexcept -> bool
@@ -36,7 +34,7 @@ namespace bml
             {
                 return false;
             }
-            else if constexpr (!is_detected_v<referenced_type, T>)
+            else if constexpr (!is_referenceable_v<T>)
             {
                 return true;
             }

@@ -40,6 +40,12 @@ auto check_not_function() noexcept -> void
     static_assert(!bml::is_function_v<T const volatile>);
 }
 
+template <typename NoFoo>
+struct do_not_instantiate
+{
+    static constexpr auto x = NoFoo::foo;
+};
+
 auto test_main() noexcept -> int
 {
     // Check that the result is true when the input is a function.
@@ -82,6 +88,11 @@ auto test_main() noexcept -> int
         check_not_function<auto (*&&)(int) noexcept -> void>();
         check_not_function<auto (bmltb::class_type::*)() -> void>();
         check_not_function<auto (bmltb::class_type::*)() const volatile && noexcept -> void>();
+    }
+    
+    // Check that is_function does not instantiate more templates than needed.
+    {
+        check_not_function<do_not_instantiate<int>*>();
     }
 
     return 0;
