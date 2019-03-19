@@ -34,6 +34,6 @@ namespace bml
         -> enable_if_ty<is_same_v<T, T, Ts...>, T const&>
     {
         auto& curr_min = (a2 < a1) ? a2 : a1;
-        return min(curr_min, an...);
+        return bml::min(curr_min, an...);
     }
 }

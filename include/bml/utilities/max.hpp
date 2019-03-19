@@ -34,6 +34,6 @@ namespace bml
         -> enable_if_ty<is_same_v<T, T, Ts...>, T const&>
     {
         auto& curr_max = (a2 < a1) ? a1 : a2;
-        return max(curr_max, an...);
+        return bml::max(curr_max, an...);
     }
 }
