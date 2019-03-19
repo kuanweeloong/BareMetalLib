@@ -78,7 +78,7 @@ bml_add_test("type_traits.is_trivially_copy_constructible" is_trivially_copy_con
 bml_add_test("type_traits.is_trivially_move_constructible" is_trivially_move_constructible.cpp)
 bml_add_test("type_traits.is_trivially_copy_assignable" is_trivially_copy_assignable.cpp)
 bml_add_test("type_traits.is_trivially_move_assignable" is_trivially_move_assignable.cpp)
-bml_add_test("type_traits.is_array_of_unknown_bound" is_array_of_unknown_bound.cpp)
+bml_add_test("type_traits.is_unbounded_array" is_unbounded_array.cpp)
 bml_add_test("type_traits.is_destructible" is_destructible.cpp)
 bml_add_test("type_traits.is_trivially_destructible" is_trivially_destructible.cpp)
 bml_add_test("type_traits.is_polymorphic" is_polymorphic.cpp)

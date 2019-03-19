@@ -8,7 +8,7 @@
 #pragma once
 #include "bool_constant.hpp"
 #include "is_detected.hpp"
-#include "is_array_of_unknown_bound.hpp"
+#include "is_unbounded_array.hpp"
 #include "is_reference.hpp"
 #include "is_function.hpp"
 #include "is_void.hpp"
@@ -25,7 +25,7 @@ namespace bml
         template <typename T>
         constexpr auto check() noexcept -> bool
         {
-            if constexpr (is_function_v<T> || is_void_v<T> || is_array_of_unknown_bound_v<T>)
+            if constexpr (is_function_v<T> || is_void_v<T> || is_unbounded_array_v<T>)
             {
                 return false;
             }
