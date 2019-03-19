@@ -27,3 +27,4 @@ bml_add_compile_failure_test("utilities.launder.fail.launder_function"
     launder.fail.launder_function.cpp "Cannot launder function.")
 bml_add_compile_failure_test("utilities.launder.fail.launder_void" launder.fail.launder_void.cpp
     "Cannot launder void.")
+bml_add_test("utilities.swap" swap.cpp)
