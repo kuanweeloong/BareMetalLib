@@ -10,6 +10,7 @@
 #include "../type_traits/is_move_constructible.hpp"
 #include "../type_traits/is_move_assignable.hpp"
 #include "../type_traits/is_detected.hpp"
+#include "../type_traits/add_lvalue_reference.hpp"
 #include "move.hpp"
 #include "declval.hpp"
 
@@ -47,4 +48,17 @@ namespace bml
     //
     template <typename T, typename U>
     inline constexpr auto is_swappable_with_v = bool(is_swappable_with<T, U>::value);
+    
+    //
+    // See std::is_swappable.
+    //
+    template <typename T>
+    struct is_swappable
+        : is_swappable_with<add_lvalue_reference_ty<T>, add_lvalue_reference_ty<T>> {};
+    
+    //
+    // See std::is_swappable_v.
+    //
+    template <typename T>
+    inline constexpr auto is_swappable_v = bool(is_swappable<T>::value);
 }
