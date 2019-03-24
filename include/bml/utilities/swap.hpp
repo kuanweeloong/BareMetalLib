@@ -6,6 +6,7 @@
 //
 
 #pragma once
+#include <stddef.h>
 #include "../type_traits/enable_if.hpp"
 #include "../type_traits/is_move_constructible.hpp"
 #include "../type_traits/is_move_assignable.hpp"
@@ -17,7 +18,7 @@
 namespace bml
 {
     //
-    // See std::swap.
+    // See std::swap (overload for non-array types).
     //
     template <typename T>
     constexpr auto swap(T& x, T& y) noexcept
@@ -27,6 +28,14 @@ namespace bml
         x = bml::move(y);
         y = bml::move(t);
     }
+    
+    // Forward declaration of the swap overload for array to allow swap_ranges to deal with nested
+    // arrays.
+    template <typename T>
+    struct is_swappable;
+    
+    template <typename T, ::size_t N>
+    constexpr auto swap(T (&x)[N], T (&y)[N]) noexcept -> enable_if_ty<is_swappable<T>::value>;
     
     //
     // See std::swap_ranges, except that this does not have the overload with ExecutionPolicy.
@@ -44,6 +53,15 @@ namespace bml
         }
         
         return first2;
+    }
+    
+    //
+    // See std::swap (overload for array types).
+    //
+    template <typename T, ::size_t N>
+    constexpr auto swap(T (&x)[N], T (&y)[N]) noexcept -> enable_if_ty<is_swappable<T>::value>
+    {
+        static_cast<void>(bml::swap_ranges(x, x + N, y));
     }
     
     namespace detail::is_swappable_with_detail
