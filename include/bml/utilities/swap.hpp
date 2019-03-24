@@ -28,6 +28,24 @@ namespace bml
         y = bml::move(t);
     }
     
+    //
+    // See std::swap_ranges, except that this does not have the overload with ExecutionPolicy.
+    //
+    template <typename ForwardIt1, typename ForwardIt2>
+    constexpr auto swap_ranges(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2) noexcept
+        -> ForwardIt2
+    {
+        while (first1 != last1)
+        {
+            swap(*first1, *first2);
+            
+            static_cast<void>(++first1);
+            static_cast<void>(++first2);
+        }
+        
+        return first2;
+    }
+    
     namespace detail::is_swappable_with_detail
     {
         template <typename T, typename U>
