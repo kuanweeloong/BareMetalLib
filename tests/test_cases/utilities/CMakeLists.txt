@@ -29,3 +29,7 @@ bml_add_compile_failure_test("utilities.launder.fail.launder_void" launder.fail.
     "Cannot launder void.")
 bml_add_test("utilities.swap" swap.cpp)
 bml_add_test("utilities.swap_ranges" swap_ranges.cpp)
+bml_add_test("utilities.integer_sequence" integer_sequence.cpp)
+bml_add_compile_failure_test("utilities.integer_sequence.fail.non_integral"
+    integer_sequence.fail.non_integral.cpp
+    "T is not integral..")
