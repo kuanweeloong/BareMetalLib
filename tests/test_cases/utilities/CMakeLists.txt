@@ -37,3 +37,4 @@ bml_add_test("utilities.make_integer_sequence" make_integer_sequence.cpp)
 bml_add_compile_failure_test("utilities.make_integer_sequence.fail.negative_n"
     make_integer_sequence.fail.negative_n.cpp)
 bml_add_test("utilities.index_sequence" index_sequence.cpp)
+bml_add_test("utilities.make_index_sequence" make_index_sequence.cpp)
