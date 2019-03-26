@@ -33,3 +33,6 @@ bml_add_test("utilities.integer_sequence" integer_sequence.cpp)
 bml_add_compile_failure_test("utilities.integer_sequence.fail.non_integral"
     integer_sequence.fail.non_integral.cpp
     "T is not integral..")
+bml_add_test("utilities.make_integer_sequence" make_integer_sequence.cpp)
+bml_add_compile_failure_test("utilities.make_integer_sequence.fail.negative_n"
+    make_integer_sequence.fail.negative_n.cpp)
