@@ -93,6 +93,10 @@ bml_add_test("type_traits.has_unique_object_representations" has_unique_object_r
 bml_add_test("type_traits.type_identity" type_identity.cpp)
 bml_add_test("type_traits.decay" decay.cpp)
 bml_add_test("type_traits.aligned_storage" aligned_storage.cpp)
+bml_add_compile_failure_test("type_traits.aligned_storage.fail.neg_len"
+    aligned_storage.fail.neg_len.cpp "Len cannot be negative.")
+bml_add_compile_failure_test("type_traits.aligned_storage.fail.neg_align"
+    aligned_storage.fail.neg_align.cpp "Alignment cannot be negative.")
 bml_add_test("type_traits.aligned_union" aligned_union.cpp)
 bml_add_test("type_traits.conjunction" conjunction.cpp)
 bml_add_test("type_traits.disjunction" disjunction.cpp)
