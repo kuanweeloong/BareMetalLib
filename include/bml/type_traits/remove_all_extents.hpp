@@ -19,7 +19,7 @@ namespace bml
     template <typename T>
     struct remove_all_extents<T[]> { using type = typename remove_all_extents<T>::type; };
     
-    template <typename T, ::size_t N>
+    template <typename T, ::ptrdiff_t N>
     struct remove_all_extents<T[N]> { using type = typename remove_all_extents<T>::type; };
 
     //
