@@ -98,6 +98,8 @@ bml_add_compile_failure_test("type_traits.aligned_storage.fail.neg_len"
 bml_add_compile_failure_test("type_traits.aligned_storage.fail.neg_align"
     aligned_storage.fail.neg_align.cpp "Alignment cannot be negative.")
 bml_add_test("type_traits.aligned_union" aligned_union.cpp)
+bml_add_compile_failure_test("type_traits.aligned_union.fail.neg_len" aligned_union.fail.neg_len.cpp
+    "Len cannot be negative.")
 bml_add_test("type_traits.conjunction" conjunction.cpp)
 bml_add_test("type_traits.disjunction" disjunction.cpp)
 bml_add_test("type_traits.negation" negation.cpp)
