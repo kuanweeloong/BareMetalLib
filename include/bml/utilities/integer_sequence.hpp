@@ -8,6 +8,7 @@
 #pragma once
 #include <stddef.h>
 #include "../type_traits/is_integral.hpp"
+#include "../detail/size_to_ptrdiff.hpp"
 
 namespace bml
 {
@@ -21,9 +22,9 @@ namespace bml
         
         using value_type = T;
         
-        [[nodiscard]] static constexpr auto size() noexcept -> ::size_t
+        [[nodiscard]] static constexpr auto size() noexcept -> ::ptrdiff_t
         {
-            return sizeof...(Is);
+            return detail::size_to_ptrdiff<sizeof...(Is)>();
         }
     };
 }
