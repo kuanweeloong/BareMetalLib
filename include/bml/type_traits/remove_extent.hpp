@@ -13,9 +13,9 @@ namespace bml
     //
     // See std::remove_extent.
     //
-    template <typename T>             struct remove_extent       { using type = T; };
-    template <typename T>             struct remove_extent<T[]>  { using type = T; };
-    template <typename T, ::size_t N> struct remove_extent<T[N]> { using type = T; };
+    template <typename T>                struct remove_extent       { using type = T; };
+    template <typename T>                struct remove_extent<T[]>  { using type = T; };
+    template <typename T, ::ptrdiff_t N> struct remove_extent<T[N]> { using type = T; };
 
     //
     // See std::remove_extent_t, except that this is named remove_extent_ty for POSIX compatibility.
