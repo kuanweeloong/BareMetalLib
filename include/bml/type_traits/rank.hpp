@@ -12,20 +12,20 @@
 namespace bml
 {
     //
-    // See std::rank.
+    // See std::rank, except that this exposes rank as a ptrdiff_t instead of size_t.
     //
     template <typename T> 
-    struct rank : integral_constant<::size_t, 0> {};
+    struct rank : integral_constant<::ptrdiff_t, 0> {};
     
     template <typename T>
-    struct rank<T[]> : integral_constant<::size_t, rank<T>::value + 1> {};
+    struct rank<T[]> : integral_constant<::ptrdiff_t, rank<T>::value + 1> {};
     
-    template <typename T, ::size_t N>
-    struct rank<T[N]> : integral_constant<::size_t, rank<T>::value + 1> {};
+    template <typename T, ::ptrdiff_t N>
+    struct rank<T[N]> : integral_constant<::ptrdiff_t, rank<T>::value + 1> {};
 
     //
-    // See std::rank_v.
+    // See std::rank_v, except that this is a ptrdiff_t instead of size_t.
     //
     template <typename T>
-    inline constexpr auto rank_v = ::size_t(rank<T>::value);
+    inline constexpr auto rank_v = ::ptrdiff_t(rank<T>::value);
 }
