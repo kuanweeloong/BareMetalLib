@@ -88,6 +88,8 @@ bml_add_test("type_traits.has_virtual_destructor" has_virtual_destructor.cpp)
 bml_add_test("type_traits.alignment_of" alignment_of.cpp)
 bml_add_test("type_traits.rank" rank.cpp)
 bml_add_test("type_traits.extent" extent.cpp)
+bml_add_compile_failure_test("type_traits.extent.fail.neg_n" extent.fail.neg_n.cpp
+    "N cannot be negative.")
 bml_add_test("type_traits.enable_if" enable_if.cpp)
 bml_add_test("type_traits.has_unique_object_representations" has_unique_object_representations.cpp)
 bml_add_test("type_traits.type_identity" type_identity.cpp)

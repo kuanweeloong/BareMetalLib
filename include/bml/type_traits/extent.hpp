@@ -12,26 +12,33 @@
 namespace bml
 {
     //
-    // See std::extent.
+    // See std::extent, except that:
+    //   1. This exposes the extent as a ptrdiff_t instead of size_t.
+    //   2. N is an int instead of unsigned. If N is negative, the program is ill-formed.
+    //   3. This deduces array length as ptrdiff_t instead of size_t.
     //
-    template <typename T, unsigned N = 0>
-    struct extent : integral_constant<::size_t, 0> {};
+    template <typename T, int N = 0>
+    struct extent : integral_constant<::ptrdiff_t, 0>
+    {
+        static_assert(N >= 0, "N cannot be negative.");
+    };
     
     template <typename T>
-    struct extent<T[], 0> : integral_constant<::size_t, 0> {};
+    struct extent<T[], 0> : integral_constant<::ptrdiff_t, 0> {};
     
-    template <typename T, ::size_t Len>
-    struct extent<T[Len], 0> : integral_constant<::size_t, Len> {};
+    template <typename T, ::ptrdiff_t Len>
+    struct extent<T[Len], 0> : integral_constant<::ptrdiff_t, Len> {};
     
-    template <typename T, unsigned N>
+    template <typename T, int N>
     struct extent<T[], N> : extent<T, N - 1> {};
     
-    template <typename T, unsigned N, ::size_t Len>
+    template <typename T, int N, ::ptrdiff_t Len>
     struct extent<T[Len], N> : extent<T, N - 1> {};
 
     //
-    // See std::extent_v.
+    // See std::extent_v, except that this is a ptrdiff_t instead of size_t, and N is int instead of
+    // unsigned.
     //
-    template <typename T, unsigned N = 0>
-    inline constexpr auto extent_v = ::size_t(extent<T, N>::value);
+    template <typename T, int N = 0>
+    inline constexpr auto extent_v = ::ptrdiff_t(extent<T, N>::value);
 }
