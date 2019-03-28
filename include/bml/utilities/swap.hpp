@@ -34,7 +34,7 @@ namespace bml
     template <typename T>
     struct is_swappable;
     
-    template <typename T, ::size_t N>
+    template <typename T, ::ptrdiff_t N>
     constexpr auto swap(T (&x)[N], T (&y)[N]) noexcept -> enable_if_ty<is_swappable<T>::value>;
     
     //
@@ -56,9 +56,10 @@ namespace bml
     }
     
     //
-    // See std::swap (overload for array types).
+    // See std::swap (overload for array types), except that this deduces array length as ptrdiff_t
+    // instead of size_t. If the array length is negative, the program is ill-formed.
     //
-    template <typename T, ::size_t N>
+    template <typename T, ::ptrdiff_t N>
     constexpr auto swap(T (&x)[N], T (&y)[N]) noexcept -> enable_if_ty<is_swappable<T>::value>
     {
         static_cast<void>(bml::swap_ranges(x, x + N, y));
