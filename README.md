@@ -20,8 +20,8 @@ Apart from these bare-metal-related constraints, the following additional constr
 BML code:
 
 - Unsigned types cannot be used, except for bitfields. For example, sizes and indices are
-  represented using `ptrdiff_t` (instead of the usual `size_t`, like what the C++ standard library
-  does). This brings BML more in line with the [arithmetic section][2] of the C++ core guidelines.
+  represented using `ptrdiff_t` (instead of `size_t`, which is what the C++ standard library does).
+  This brings BML more in line with the [arithmetic section][2] of the C++ core guidelines.
 
 Due to these constraints, BML is **not** a drop-in replacement for the C++ standard library.
 However, other than being exception-free, user code is not expected to conform to the same
