@@ -22,7 +22,7 @@ namespace bml::detail::is_constructible_detail
     template <typename T>
     struct is_array_with_unknown_bounds<T[]> : true_type {};
     
-    template <typename T, ::size_t N>
+    template <typename T, ::ptrdiff_t N>
     struct is_array_with_unknown_bounds<T[N]> : is_array_with_unknown_bounds<T> {};
     
     template <typename T, typename... Args>
