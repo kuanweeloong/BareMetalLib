@@ -12,6 +12,6 @@
 
 namespace bml
 {
-    template <::size_t N>
-    using make_index_sequence = make_integer_sequence<::size_t, N>;
+    template <::ptrdiff_t N>
+    using make_index_sequence = make_integer_sequence<::ptrdiff_t, N>;
 }
