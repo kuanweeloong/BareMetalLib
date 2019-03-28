@@ -12,11 +12,11 @@
 
 auto test_main() noexcept -> int
 {
-    // Check that the value_type member type alias names ::size_t.
+    // Check that the value_type member type alias names ptrdiff_t.
     {
-        static_assert(bml::is_same_v<::size_t, typename bml::index_sequence<>::value_type>);
-        static_assert(bml::is_same_v<::size_t,
-            typename bml::index_sequence<1, 2, 10, 3, 5>::value_type>);
+        static_assert(bml::is_same_v<::ptrdiff_t, typename bml::index_sequence<>::value_type>);
+        static_assert(bml::is_same_v<::ptrdiff_t,
+            typename bml::index_sequence<1, 2, -10, 3, 5>::value_type>);
     }
     
     return 0;

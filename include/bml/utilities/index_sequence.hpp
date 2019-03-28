@@ -14,6 +14,6 @@ namespace bml
     //
     // See std::index_sequence.
     //
-    template <::size_t... Is>
-    using index_sequence = integer_sequence<::size_t, Is...>;
+    template <::ptrdiff_t... Is>
+    using index_sequence = integer_sequence<::ptrdiff_t, Is...>;
 }
