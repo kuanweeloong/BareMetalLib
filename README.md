@@ -40,7 +40,8 @@ BML requires a C++17 conforming compiler. It is tested on the following platform
 | Ubuntu 16.04.5 LTS | x64          | Clang 6.0.1 | Via Travis CI |
 
 ## License
-BML is licensed under the MIT license. For more details, see [LICENSE.md](LICENSE.md).
+BML is licensed under the Apache 2.0 License with LLVM exceptions. For more details, see
+[LICENSE.md](LICENSE.md).
 
 [1]: https://travis-ci.org/kuanweeloong/BareMetalLib
 [2]: https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-mix

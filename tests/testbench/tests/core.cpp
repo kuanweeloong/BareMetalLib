@@ -1,8 +1,13 @@
 //
 // Copyright (c) 2018 Wee Loong Kuan
 //
-// This file is licensed under the MIT license. For more details, see the LICENSE.md file in the
-// top-level directory of this distribution.
+// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
+// 
+// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
+// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
+// https://llvm.org/LICENSE.txt.
+//
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
 
 #include <bml_testbench.hpp>
@@ -36,10 +41,10 @@ auto test_main() noexcept -> int
     {
         // There's probably a better way to do this...
         constexpr auto& line = BMLTB_LINE_NUM;
-        static_assert(line[0] == '3' && line[1] == '8' && line[2] == '\0');
+        static_assert(line[0] == '4' && line[1] == '3' && line[2] == '\0');
 
         constexpr auto& line2 = BMLTB_LINE_NUM;
-        static_assert(line2[0] == '4' && line2[1] == '1' && line2[2] == '\0');
+        static_assert(line2[0] == '4' && line2[1] == '6' && line2[2] == '\0');
     }
     
     // Check that is_same is true when its inputs name the same type.
