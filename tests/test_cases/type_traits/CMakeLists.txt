@@ -115,3 +115,6 @@ bml_add_test("type_traits.is_swappable_with" is_swappable_with.cpp)
 bml_add_test("type_traits.is_swappable" is_swappable.cpp)
 bml_add_test("type_traits.size_of" size_of.cpp)
 bml_add_compile_failure_test("type_traits.size_of.fail.incomplete" size_of.fail.incomplete.cpp)
+bml_add_test("type_traits.type_pack_element" type_pack_element.cpp)
+bml_add_compile_failure_test("type_traits.type_pack_element.fail.neg_n"
+    type_pack_element.fail.neg_n.cpp "N cannot be negative.")
