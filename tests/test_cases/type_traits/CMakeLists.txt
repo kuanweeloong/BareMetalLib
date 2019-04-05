@@ -120,3 +120,4 @@ bml_add_compile_failure_test("type_traits.type_pack_element.fail.neg_n"
     type_pack_element.fail.neg_n.cpp "N cannot be negative.")
 bml_add_test("type_traits.pack_size" pack_size.cpp)
 bml_add_test("type_traits.member_pointer_class" member_pointer_class.cpp)
+bml_add_test("type_traits.invoke_result" invoke_result.cpp)
