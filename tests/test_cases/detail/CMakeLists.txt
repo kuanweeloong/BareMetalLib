@@ -14,5 +14,6 @@ bml_add_test("detail.size_to_ptrdiff" size_to_ptrdiff.cpp)
 bml_add_compile_failure_test("detail.size_to_ptrdiff.fail.overflow"
     size_to_ptrdiff.fail.overflow.cpp
     "Input is larger than PTRDIFF_MAX.")
+bml_add_test("detail.INVOKE" INVOKE.cpp)
 
 add_subdirectory(macros)
