@@ -121,3 +121,6 @@ bml_add_compile_failure_test("type_traits.type_pack_element.fail.neg_n"
 bml_add_test("type_traits.pack_size" pack_size.cpp)
 bml_add_test("type_traits.member_pointer_class" member_pointer_class.cpp)
 bml_add_test("type_traits.invoke_result" invoke_result.cpp)
+bml_add_test("type_traits.is_reference_wrapper" is_reference_wrapper.cpp)
+bml_add_compile_failure_test("type_traits.is_reference_wrapper.fail.instantiate_wrapper"
+    is_reference_wrapper.fail.instantiate_wrapper.cpp)
