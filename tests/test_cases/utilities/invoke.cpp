@@ -12,6 +12,7 @@
 
 #include <bml_testbench.hpp>
 #include <bml/utilities/invoke.hpp>
+#include <bml/utilities/reference_wrapper.hpp>
 #include <bml/type_traits/is_same.hpp>
 
 struct base
@@ -31,6 +32,8 @@ constexpr auto foo(int i) noexcept -> int
     return i;
 }
 
+constexpr auto global_derived = derived();
+
 auto test_main() noexcept -> int
 {
     // Note: these tests are a simplified version of the tests for INVOKE (detail/INVOKE.cpp), since
@@ -40,6 +43,7 @@ auto test_main() noexcept -> int
     // Check that pointers to member functions can be invoked.
     {
         constexpr auto d = derived();
+        constexpr auto d_ref = bml::reference_wrapper(global_derived);
         
         constexpr auto int_fun = 
             static_cast<auto (base::*)(int) const noexcept -> int>(&base::operator());
@@ -48,18 +52,24 @@ auto test_main() noexcept -> int
         
         static_assert(bml::is_same_v<decltype(bml::invoke(int_fun, d, 10)), int>);
         static_assert(bml::invoke(int_fun, d, 10) == 10);
+        static_assert(bml::invoke(int_fun, d_ref, 10) == 10);
         
         static_assert(bml::is_same_v<decltype(bml::invoke(double_fun, d, 10.0)), double>);
         static_assert(bml::invoke(double_fun, d, 10.0) == 10.0);
+        static_assert(bml::invoke(double_fun, d_ref, 10.0) == 10.0);
     }
     
     // Check that pointers to data members can be invoked.
     {
         constexpr auto d = derived();
+        constexpr auto d_ref = bml::reference_wrapper(global_derived);
         constexpr auto mem_ptr = &derived::m_i;
         
         static_assert(bml::is_same_v<decltype(bml::invoke(mem_ptr, d)), int const&>);
         static_assert(bml::invoke(mem_ptr, d) == 42);
+        
+        static_assert(bml::is_same_v<decltype(bml::invoke(mem_ptr, d_ref)), int const&>);
+        static_assert(bml::invoke(mem_ptr, d_ref) == 42);
     }
     
     // Check that free functions can be invoked.

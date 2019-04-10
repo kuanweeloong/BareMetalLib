@@ -19,6 +19,7 @@
 #include "../type_traits/type_pack_element.hpp"
 #include "../type_traits/decay.hpp"
 #include "../type_traits/pack_size.hpp"
+#include "../type_traits/is_reference_wrapper.hpp"
 #include "../utilities/forward.hpp"
 
 namespace bml::detail
@@ -44,6 +45,13 @@ namespace bml::detail
         }
         
         template <typename F, typename T1, typename... Tn>
+        constexpr auto impl(bullet<2>, F&& f, T1&& t1, Tn&&... tn) noexcept
+            -> decltype((forward<T1>(t1).get().*forward<F>(f))(forward<Tn>(tn)...))
+        {
+            return (forward<T1>(t1).get().*forward<F>(f))(forward<Tn>(tn)...);
+        }
+        
+        template <typename F, typename T1, typename... Tn>
         constexpr auto impl(bullet<3>, F&& f, T1&& t1, Tn&&... tn) noexcept
             -> decltype(((*forward<T1>(t1)).*forward<F>(f))(forward<Tn>(tn)...))
         {
@@ -55,6 +63,13 @@ namespace bml::detail
             -> decltype(forward<T>(t).*forward<F>(f))
         {
             return forward<T>(t).*forward<F>(f);
+        }
+        
+        template <typename F, typename T>
+        constexpr auto impl(bullet<5>, F&& f, T&& t) noexcept
+            -> decltype(forward<T>(t).get().*forward<F>(f))
+        {
+            return forward<T>(t).get().*forward<F>(f);
         }
         
         template <typename F, typename T>
@@ -101,6 +116,16 @@ namespace bml::detail
                 return INVOKE_detail::impl(INVOKE_detail::bullet<1>(), forward<F>(f),
                     forward<ArgTypes>(args)...);
             }
+            else if constexpr(is_reference_wrapper_v<
+                decay_ty<type_pack_element_ty<0, ArgTypes...>>>)
+            {
+                // [1.2] INVOKE(f, t1, t2, ..., tN) is equivalent to (t1.get().*f)(t2, ..., tN) when
+                // f is a pointer to a member function of a class T and decay_ty<decltype(t1)> is a
+                // specialization of reference_wrapper.
+                
+                return INVOKE_detail::impl(INVOKE_detail::bullet<2>(), forward<F>(f),
+                    forward<ArgTypes>(args)...);
+            }
             else
             {
                 // [1.3] INVOKE(f, t1, t2, ..., tN) is equivalent to ((*t1).*f)(t2, ..., tN) when f
@@ -121,6 +146,16 @@ namespace bml::detail
                 // is true.
                 
                 return INVOKE_detail::impl(INVOKE_detail::bullet<4>(), forward<F>(f),
+                    forward<ArgTypes>(args)...);
+            }
+            else if constexpr (is_reference_wrapper_v<
+                decay_ty<type_pack_element_ty<0, ArgTypes...>>>)
+            {
+                // [1.5] INVOKE(f, t1, t2, ..., tN) is equivalent to t1.get().*f when N == 1 and f
+                // is a pointer to data member of a class T and decay_ty<decltype(t1)> is a
+                // specialization of reference_wrapper.
+                
+                return INVOKE_detail::impl(INVOKE_detail::bullet<5>(), forward<F>(f),
                     forward<ArgTypes>(args)...);
             }
             else

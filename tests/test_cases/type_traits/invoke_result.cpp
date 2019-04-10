@@ -14,6 +14,7 @@
 #include <bml/type_traits/invoke_result.hpp>
 #include <bml/detail/INVOKE.hpp>
 #include <bml/utilities/declval.hpp>
+#include <bml/utilities/reference_wrapper.hpp>
 #include <bml/type_traits/is_same.hpp>
 #include <bml/type_traits/is_detected.hpp>
 
@@ -45,8 +46,6 @@ auto test_main() noexcept -> int
     // Check that the result names the same type as the type of the expression INVOKE(declval<Fn>(),
     // declval<ArgTypes>()...).
     {
-        // TODO: Check reference_wrapper when it's implemented.
-        
         // Pointer to member functions.
         check_result<auto (c::*)(int) -> void, c, int>();
         check_result<auto (c::*)(int) & -> double, c&, int>();
@@ -56,10 +55,23 @@ auto test_main() noexcept -> int
         check_result<auto (c::*)(...) -> float, c>();
         check_result<auto (c::*)(...) -> float, c, int, int*>();
         
+        check_result<auto (c::*)(int) -> void, bml::reference_wrapper<c>, int>();
+        check_result<auto (c::*)(int) & -> double, bml::reference_wrapper<c>, int>();
+        check_result<auto (c::*)(int) const volatile -> void,
+            bml::reference_wrapper<c const volatile>&, int>();
+        check_result<auto (c::*)(int, char) const & -> int const&,
+            bml::reference_wrapper<c>&&, int, char&>();
+        check_result<auto (c::*)(...) -> float, bml::reference_wrapper<c>>();
+        check_result<auto (c::*)(...) -> float, bml::reference_wrapper<c>&, int, int*>();
+        
         // Pointer to data members.
         check_result<int c::*, c>();
         check_result<char* c::*, c>();
         check_result<bmltb::class_type c::*, c>();
+        
+        check_result<int c::*, bml::reference_wrapper<c>>();
+        check_result<char* c::*, bml::reference_wrapper<c>>();
+        check_result<bmltb::class_type c::*, bml::reference_wrapper<c>>();
         
         // Free functions.
         check_result<auto () -> void>();
@@ -100,6 +112,11 @@ auto test_main() noexcept -> int
         static_assert(!bml::is_detected_v<type_member_alias,
             bml::invoke_result<auto (c::*)() & -> int, c>>);
         static_assert(!bml::is_detected_v<valid_invoke_result_ty, auto (c::*)() & -> int, c>);
+        
+        static_assert(!bml::is_detected_v<type_member_alias,
+            bml::invoke_result<auto (c::*)() && -> void, bml::reference_wrapper<c>>>);
+        static_assert(!bml::is_detected_v<valid_invoke_result_ty, auto (c::*)() && -> void,
+            bml::reference_wrapper<c>>);
         
         static_assert(!bml::is_detected_v<type_member_alias,
             bml::invoke_result<auto () -> void, int, int&>>);
