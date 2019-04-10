@@ -124,3 +124,4 @@ bml_add_test("type_traits.invoke_result" invoke_result.cpp)
 bml_add_test("type_traits.is_reference_wrapper" is_reference_wrapper.cpp)
 bml_add_compile_failure_test("type_traits.is_reference_wrapper.fail.instantiate_wrapper"
     is_reference_wrapper.fail.instantiate_wrapper.cpp)
+bml_add_test("type_traits.is_invocable" is_invocable.cpp)
