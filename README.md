@@ -12,7 +12,7 @@ programming. Namely, it eschews the use of:
 - Exceptions (BML is `noexcept` throughout)
 - RTTI
 - Thread-local storage
-- Static objects
+- Non-`constexpr` static objects (BML does not require any initialization at runtime)
 - Dynamic allocation via global `operator new` or `operator new[]`
 - Floating point operations
 
