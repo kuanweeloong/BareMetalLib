@@ -17,6 +17,10 @@
 
 namespace bml
 {
+    //
+    // See std::make_index_sequence, except that this uses ptrdiff_t instead of size_t for the
+    // underlying integer type.
+    //
     template <::ptrdiff_t N>
     using make_index_sequence = make_integer_sequence<::ptrdiff_t, N>;
 }

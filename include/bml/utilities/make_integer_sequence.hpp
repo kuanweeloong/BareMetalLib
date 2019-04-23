@@ -16,6 +16,9 @@
 
 namespace bml
 {
+    //
+    // See std::make_integer_sequence.
+    //
     template <typename T, T N>
     using make_integer_sequence = detail::make_integer_sequence_detail::impl<T, N>;
 }
