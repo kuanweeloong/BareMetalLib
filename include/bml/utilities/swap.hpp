@@ -51,6 +51,7 @@ namespace bml
     {
         while (first1 != last1)
         {
+            // Note: ADL for swap explicitly wanted here to find user-defined swaps.
             swap(*first1, *first2);
             
             static_cast<void>(++first1);
@@ -72,8 +73,9 @@ namespace bml
     
     namespace detail::is_swappable_with_detail
     {
+        // Note: ADL for swap is explicitly wanted here to find user-defined swaps.
         template <typename T, typename U>
-        using check = decltype(swap(declval<T>(), declval<U>()));
+        using check = decltype(swap(bml::declval<T>(), bml::declval<U>()));
     }
     
     //

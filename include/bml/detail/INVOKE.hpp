@@ -39,51 +39,51 @@ namespace bml::detail
         
         template <typename F, typename T1, typename... Tn>
         constexpr auto impl(bullet<1>, F&& f, T1&& t1, Tn&&... tn) noexcept
-            -> decltype((forward<T1>(t1).*forward<F>(f))(forward<Tn>(tn)...))
+            -> decltype((bml::forward<T1>(t1).*bml::forward<F>(f))(bml::forward<Tn>(tn)...))
         {
-            return (forward<T1>(t1).*forward<F>(f))(forward<Tn>(tn)...);
+            return (bml::forward<T1>(t1).*bml::forward<F>(f))(bml::forward<Tn>(tn)...);
         }
         
         template <typename F, typename T1, typename... Tn>
         constexpr auto impl(bullet<2>, F&& f, T1&& t1, Tn&&... tn) noexcept
-            -> decltype((forward<T1>(t1).get().*forward<F>(f))(forward<Tn>(tn)...))
+            -> decltype((bml::forward<T1>(t1).get().*bml::forward<F>(f))(bml::forward<Tn>(tn)...))
         {
-            return (forward<T1>(t1).get().*forward<F>(f))(forward<Tn>(tn)...);
+            return (bml::forward<T1>(t1).get().*bml::forward<F>(f))(bml::forward<Tn>(tn)...);
         }
         
         template <typename F, typename T1, typename... Tn>
         constexpr auto impl(bullet<3>, F&& f, T1&& t1, Tn&&... tn) noexcept
-            -> decltype(((*forward<T1>(t1)).*forward<F>(f))(forward<Tn>(tn)...))
+            -> decltype(((*bml::forward<T1>(t1)).*bml::forward<F>(f))(bml::forward<Tn>(tn)...))
         {
-            return ((*forward<T1>(t1)).*forward<F>(f))(forward<Tn>(tn)...);
+            return ((*bml::forward<T1>(t1)).*bml::forward<F>(f))(bml::forward<Tn>(tn)...);
         }
         
         template <typename F, typename T>
         constexpr auto impl(bullet<4>, F&& f, T&& t) noexcept
-            -> decltype(forward<T>(t).*forward<F>(f))
+            -> decltype(bml::forward<T>(t).*bml::forward<F>(f))
         {
-            return forward<T>(t).*forward<F>(f);
+            return bml::forward<T>(t).*bml::forward<F>(f);
         }
         
         template <typename F, typename T>
         constexpr auto impl(bullet<5>, F&& f, T&& t) noexcept
-            -> decltype(forward<T>(t).get().*forward<F>(f))
+            -> decltype(bml::forward<T>(t).get().*bml::forward<F>(f))
         {
-            return forward<T>(t).get().*forward<F>(f);
+            return bml::forward<T>(t).get().*bml::forward<F>(f);
         }
         
         template <typename F, typename T>
         constexpr auto impl(bullet<6>, F&& f, T&& t) noexcept
-            -> decltype((*forward<T>(t)).*forward<F>(f))
+            -> decltype((*bml::forward<T>(t)).*bml::forward<F>(f))
         {
-            return (*forward<T>(t)).*forward<F>(f);
+            return (*bml::forward<T>(t)).*bml::forward<F>(f);
         }
         
         template <typename F, typename... ArgTypes>
         constexpr auto impl(bullet<7>, F&& f, ArgTypes&&... args) noexcept
-            -> decltype(forward<F>(f)(forward<ArgTypes>(args)...))
+            -> decltype(bml::forward<F>(f)(bml::forward<ArgTypes>(args)...))
         {
-            return forward<F>(f)(forward<ArgTypes>(args)...);
+            return bml::forward<F>(f)(bml::forward<ArgTypes>(args)...);
         }
         
         // Default catch-all when something is not invocable
@@ -99,8 +99,6 @@ namespace bml::detail
     // except that this is also constexpr. For now, this does not support invocation via
     // reference_wrapper.
     //
-    // TODO: Implement reference_wrapper handling when reference_wrapper is implemented.
-    //
     template <typename F, typename... ArgTypes>
     constexpr auto INVOKE(F&& f, ArgTypes&&... args) noexcept -> decltype(auto)
     {
@@ -113,8 +111,8 @@ namespace bml::detail
                 // a pointer to a member function of a class T and is_base_of_v<T, decay_ty<
                 // decltype(t1)>> is true.
                 
-                return INVOKE_detail::impl(INVOKE_detail::bullet<1>(), forward<F>(f),
-                    forward<ArgTypes>(args)...);
+                return INVOKE_detail::impl(INVOKE_detail::bullet<1>(), bml::forward<F>(f),
+                    bml::forward<ArgTypes>(args)...);
             }
             else if constexpr(is_reference_wrapper_v<
                 decay_ty<type_pack_element_ty<0, ArgTypes...>>>)
@@ -123,8 +121,8 @@ namespace bml::detail
                 // f is a pointer to a member function of a class T and decay_ty<decltype(t1)> is a
                 // specialization of reference_wrapper.
                 
-                return INVOKE_detail::impl(INVOKE_detail::bullet<2>(), forward<F>(f),
-                    forward<ArgTypes>(args)...);
+                return INVOKE_detail::impl(INVOKE_detail::bullet<2>(), bml::forward<F>(f),
+                    bml::forward<ArgTypes>(args)...);
             }
             else
             {
@@ -132,8 +130,8 @@ namespace bml::detail
                 // is a pointer to a member function of a class T and t1 does not satisfy the
                 // previous two items.
                 
-                return INVOKE_detail::impl(INVOKE_detail::bullet<3>(), forward<F>(f),
-                    forward<ArgTypes>(args)...);
+                return INVOKE_detail::impl(INVOKE_detail::bullet<3>(), bml::forward<F>(f),
+                    bml::forward<ArgTypes>(args)...);
             }
         }
         else if constexpr (pack_size_v<ArgTypes...> == 1 && is_member_object_pointer_v<decay_ty<F>>)
@@ -145,8 +143,8 @@ namespace bml::detail
                 // pointer to data member of a class T and is_base_of_v<T, decay_ty<decltype(t1)>>
                 // is true.
                 
-                return INVOKE_detail::impl(INVOKE_detail::bullet<4>(), forward<F>(f),
-                    forward<ArgTypes>(args)...);
+                return INVOKE_detail::impl(INVOKE_detail::bullet<4>(), bml::forward<F>(f),
+                    bml::forward<ArgTypes>(args)...);
             }
             else if constexpr (is_reference_wrapper_v<
                 decay_ty<type_pack_element_ty<0, ArgTypes...>>>)
@@ -155,8 +153,8 @@ namespace bml::detail
                 // is a pointer to data member of a class T and decay_ty<decltype(t1)> is a
                 // specialization of reference_wrapper.
                 
-                return INVOKE_detail::impl(INVOKE_detail::bullet<5>(), forward<F>(f),
-                    forward<ArgTypes>(args)...);
+                return INVOKE_detail::impl(INVOKE_detail::bullet<5>(), bml::forward<F>(f),
+                    bml::forward<ArgTypes>(args)...);
             }
             else
             {
@@ -164,8 +162,8 @@ namespace bml::detail
                 // pointer to data member of a class T and t1 does not satisfy the previous two
                 // items.
                 
-                return INVOKE_detail::impl(INVOKE_detail::bullet<6>(), forward<F>(f),
-                    forward<ArgTypes>(args)...);
+                return INVOKE_detail::impl(INVOKE_detail::bullet<6>(), bml::forward<F>(f),
+                    bml::forward<ArgTypes>(args)...);
             }
         }
         else
@@ -173,8 +171,8 @@ namespace bml::detail
             // [1.7] INVOKE(f, t1, t2, ..., tN) is equivalent to f(t1, t2, ..., tN) in all other
             // cases.
             
-            return INVOKE_detail::impl(INVOKE_detail::bullet<7>(), forward<F>(f),
-                forward<ArgTypes>(args)...);
+            return INVOKE_detail::impl(INVOKE_detail::bullet<7>(), bml::forward<F>(f),
+                bml::forward<ArgTypes>(args)...);
         }
     }
 }

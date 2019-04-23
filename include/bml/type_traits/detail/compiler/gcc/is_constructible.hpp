@@ -46,5 +46,5 @@ namespace bml::detail::is_constructible_detail
     }
     
     template <typename T, typename... Args>
-    struct impl : bool_constant<get_constructability<T, Args...>()> {};
+    struct impl : bool_constant<is_constructible_detail::get_constructability<T, Args...>()> {};
 }

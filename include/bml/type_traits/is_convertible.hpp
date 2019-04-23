@@ -26,7 +26,7 @@ namespace bml
         auto func(T) -> void;
         
         template <typename From, typename To>
-        using valid_conv = decltype(is_convertible_detail::func<To>(declval<From>()));
+        using valid_conv = decltype(is_convertible_detail::func<To>(bml::declval<From>()));
         
         template <typename From, typename To>
         constexpr auto check() noexcept -> bool

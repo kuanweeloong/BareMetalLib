@@ -30,7 +30,7 @@ namespace bml
     {
         // Two types.
         template <typename D1, typename D2>
-        using two_types_result = decay_ty<decltype(false ? declval<D1>() : declval<D2>())>;
+        using two_types_result = decay_ty<decltype(false ? bml::declval<D1>() : bml::declval<D2>())>;
         
         template <typename D1, typename D2, bool = is_detected_v<two_types_result, D1, D2>>
         struct two_types

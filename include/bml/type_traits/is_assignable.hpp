@@ -21,7 +21,7 @@ namespace bml
     namespace detail::is_assignable_detail
     {
         template <typename T, typename U>
-        using assignment_type = decltype(declval<T>() = declval<U>());
+        using assignment_type = decltype(bml::declval<T>() = bml::declval<U>());
         
         template <typename T, typename U>
         constexpr auto impl() noexcept -> bool

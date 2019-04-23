@@ -51,9 +51,9 @@ namespace bml
         //
         template <typename U,
             typename = enable_if_ty<!is_same_v<remove_cvref_ty<U>, reference_wrapper>>,
-            typename = decltype(FUN(declval<U>()))>
+            typename = decltype(FUN(bml::declval<U>()))>
         constexpr reference_wrapper(U&& u) noexcept
-            : m_ptr(addressof(convert(forward<U>(u))))
+            : m_ptr(bml::addressof(convert(bml::forward<U>(u))))
         {}
         
         //
@@ -74,7 +74,7 @@ namespace bml
         template <typename... Args>
         constexpr auto operator()(Args&&... args) const noexcept -> invoke_result_ty<T&, Args...>
         {
-            return invoke(get(), forward<Args>(args)...);
+            return bml::invoke(get(), bml::forward<Args>(args)...);
         }
     };
     

@@ -33,7 +33,7 @@ namespace bml
     //
     template <typename Fn, typename... ArgTypes>
     struct invoke_result : detail::invoke_result_detail::impl<
-        decltype(detail::INVOKE(declval<Fn>(), declval<ArgTypes>()...))> {};
+        decltype(detail::INVOKE(bml::declval<Fn>(), bml::declval<ArgTypes>()...))> {};
     
     //
     // See std::invoke_result_t, except that this is named invoke_result_ty for POSIX compatibility.

@@ -23,6 +23,6 @@ namespace bml
     template <typename F, typename... Args>
     constexpr auto invoke(F&& f, Args&&... args) noexcept -> invoke_result_ty<F, Args...>
     {
-        return detail::INVOKE(forward<F>(f), forward<Args>(args)...);
+        return detail::INVOKE(bml::forward<F>(f), bml::forward<Args>(args)...);
     }
 }

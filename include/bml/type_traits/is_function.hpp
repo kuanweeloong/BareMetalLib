@@ -29,7 +29,8 @@ namespace bml
         constexpr auto decay_check(T*) noexcept -> void;
 
         template <typename T>
-        using ref_decays_to_pointer = decltype(is_function_detail::decay_check<T>(declval<T&>()));
+        using ref_decays_to_pointer = decltype(is_function_detail::decay_check<T>(
+            bml::declval<T&>()));
         
         template <typename T>
         constexpr auto check() noexcept -> bool

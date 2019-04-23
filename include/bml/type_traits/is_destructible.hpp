@@ -25,7 +25,7 @@ namespace bml
     namespace detail::is_destructible_detail
     {
         template <typename T>
-        using destructor = decltype(declval<T&>().~T());
+        using destructor = decltype(bml::declval<T&>().~T());
         
         template <typename T>
         constexpr auto check() noexcept -> bool
