@@ -60,7 +60,7 @@ namespace bml
         // Copy construction and assignment.
         //
         constexpr reference_wrapper(reference_wrapper const& other) = default;
-        constexpr reference_wrapper& operator=(reference_wrapper const& other) = default;
+        constexpr auto operator=(reference_wrapper const& other) -> reference_wrapper& = default;
         
         //
         // Provides access to the stored reference.
