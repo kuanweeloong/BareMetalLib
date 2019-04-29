@@ -126,3 +126,4 @@ bml_add_compile_failure_test("type_traits.is_reference_wrapper.fail.instantiate_
     is_reference_wrapper.fail.instantiate_wrapper.cpp)
 bml_add_test("type_traits.is_invocable" is_invocable.cpp)
 bml_add_test("type_traits.common_type" common_type.cpp)
+bml_add_test("type_traits.is_list_convertible" is_list_convertible.cpp)
