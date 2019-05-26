@@ -27,3 +27,14 @@ bml_add_compile_failure_test("containers.variant.fail.array_alt"
     variant.fail.array_alt.cpp "variant cannot hold array types.")
 bml_add_compile_failure_test("containers.variant.fail.ref_alt"
     variant.fail.ref_alt.cpp "variant cannot hold reference types.")
+bml_add_test("containers.optional" optional.cpp)
+bml_add_compile_failure_test("containers.optional.fail.in_place_ty"
+    optional.fail.in_place_ty.cpp "optional cannot hold in_place_ty.")
+bml_add_compile_failure_test("containers.optional.fail.nullopt_ty"
+    optional.fail.nullopt_ty.cpp "optional cannot hold nullopt_ty.")
+bml_add_compile_failure_test("containers.optional.fail.void"
+    optional.fail.void.cpp "optional cannot hold void.")
+bml_add_compile_failure_test("containers.optional.fail.array"
+    optional.fail.array.cpp "optional cannot hold array types.")
+bml_add_compile_failure_test("containers.optional.fail.reference"
+    optional.fail.reference.cpp "optional cannot hold reference types.")
