@@ -12,43 +12,24 @@
 
 language: cpp
 
-matrix:
-  include:
-    # GCC
-    - os: linux
-      dist: xenial
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-8
-      env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
-    
-    # Clang
-    - os: linux
-      dist: xenial
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-xenial-6.0
-          packages:
-            - clang-6.0
-      env:
-        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+os: linux
+dist: xenial
+sudo: required
+services:
+  - docker
+
+env:
+  - DOCKER_CXX: /usr/bin/clang++-6.0
+    DOCKER_TAG: linux-x86_64
+  - DOCKER_CXX: /usr/bin/g++-8
+    DOCKER_TAG: linux-x86_64
 
 before_install:
-  - eval "${MATRIX_EVAL}"
+  - sudo docker pull kuanweeloong/bml-build:${DOCKER_TAG}
+  - >-
+    sudo docker create --rm --name bml-travis --env CXX=${DOCKER_CXX}
+    kuanweeloong/bml-build:${DOCKER_TAG}
+  - sudo docker cp . bml-travis:/bml/src/
 
 script:
-  - cmake --version
-  - ${CXX} -v
-  
-  - mkdir build
-  - cd build
-  - cmake -DBML_BUILD_TESTS=ON ..
-  - make
-  - ctest
+  - sudo docker start --attach bml-travis

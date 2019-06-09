@@ -32,12 +32,10 @@ BML is based on [libc++][3]. This is a learning project, so please be patient!
 ## Requirements
 BML requires a C++17 conforming compiler. It is tested on the following platforms:
 
-| OS                 | Architecture | Compiler    | Remarks       |
-| ------------------ | ------------ | ----------- | ------------- |
-| Ubuntu 18.04.1 LTS | x64          | GCC 8.2.0   |               |
-| Ubuntu 18.04.1 LTS | x64          | Clang 6.0.0 |               |
-| Ubuntu 16.04.5 LTS | x64          | GCC 8.1.0   | Via Travis CI |
-| Ubuntu 16.04.5 LTS | x64          | Clang 6.0.1 | Via Travis CI |
+| Architecture | OS            | Compiler    |
+| ------------ | ------------- | ----------- |
+| x86_64       | Debian Buster | GCC 8.3.0   |
+| x86_64       | Debian Buster | Clang 6.0.1 |
 
 ## License
 BML is licensed under the Apache 2.0 License with LLVM exceptions. For more details, see
