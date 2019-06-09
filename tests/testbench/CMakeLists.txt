@@ -21,9 +21,8 @@ target_include_directories(bml_testbench PUBLIC include)
 target_sources(bml_testbench PRIVATE
     "src/platform/${CMAKE_CXX_COMPILER_ID}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}.cpp")
 
-# Configure build settings to match BML's assumptions about available C++ features (i.e. those
-# listed in README.md). How to do so depends on the compiler, so this is done in a compiler-specific
-# script.
+# Configure the current compiler to disable - as much as possible - C++ features listed as eschewed
+# in README.md.
 include("cmake/${CMAKE_CXX_COMPILER_ID}BuildSettings.cmake")
 
 # Bring in tests.
