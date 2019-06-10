@@ -1,0 +1,23 @@
+#
+# Copyright (c) 2019 Wee Loong Kuan
+#
+# BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
+# 
+# This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
+# see the LICENSE.md file in the top-level directory of this distribution, or copy at 
+# https://llvm.org/LICENSE.txt.
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+
+FROM i386/debian:buster-slim
+
+RUN apt-get update
+RUN apt-get -y install --no-install-recommends cmake make clang-6.0 g++-8
+
+RUN mkdir -p /bml/src
+RUN mkdir -p /bml/build
+WORKDIR /bml/build
+
+CMD ["/bin/bash", "-c", \
+	 "cmake -DBML_BUILD_TESTS=ON -DBML_TESTBENCH_ARCH=i386 ../src && make && ctest"]
