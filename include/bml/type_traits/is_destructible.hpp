@@ -17,6 +17,7 @@
 #include "is_reference.hpp"
 #include "is_function.hpp"
 #include "is_void.hpp"
+#include "is_scalar.hpp"
 #include "remove_all_extents.hpp"
 #include "../utilities/declval.hpp"
 
@@ -34,7 +35,7 @@ namespace bml
             {
                 return false;
             }
-            else if constexpr (is_reference_v<T>)
+            else if constexpr (is_reference_v<T> || is_scalar_v<T>)
             {
                 // It looks like some compilers have problems with short-circuiting template
                 // variables and reference types in the destructor detection metafunction (see

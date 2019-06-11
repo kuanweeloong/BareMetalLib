@@ -1,0 +1,25 @@
+#
+# Copyright (c) 2019 Wee Loong Kuan
+#
+# BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
+# 
+# This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
+# see the LICENSE.md file in the top-level directory of this distribution, or copy at 
+# https://llvm.org/LICENSE.txt.
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+
+FROM arm64v8/debian:buster-slim
+
+# Enable the container to be run on (properly-configured) non-aarch64 hosts via QEMU user emulation.
+COPY qemu-aarch64-static /usr/bin/qemu-aarch64-static
+
+RUN apt-get update
+RUN apt-get -y install --no-install-recommends cmake make clang-6.0 g++-8
+
+RUN mkdir -p /bml/src
+RUN mkdir -p /bml/build
+WORKDIR /bml/build
+
+CMD ["/bin/bash", "-c", "cmake -DBML_BUILD_TESTS=ON ../src && make && ctest"]
