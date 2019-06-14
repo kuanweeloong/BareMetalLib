@@ -31,6 +31,10 @@ env:
     DOCKER_TAG: linux-aarch64
   - DOCKER_CXX: /usr/bin/g++-8
     DOCKER_TAG: linux-aarch64
+  - DOCKER_CXX: /usr/bin/clang++-6.0
+    DOCKER_TAG: linux-armv7l
+  - DOCKER_CXX: /usr/bin/g++-8
+    DOCKER_TAG: linux-armv7l
 
 before_install:
   - sudo apt-get install -y binfmt-support qemu-user-static
