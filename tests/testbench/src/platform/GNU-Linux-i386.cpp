@@ -89,11 +89,11 @@ extern "C" auto memcmp(void const* str1, void const* str2, ::size_t count) noexc
 //
 // Placement new definitions.
 //
-// The testbench is compiled without libc++, so these definitions are intended to stand-in for those
-// typically provided by libc++'s <new>.
+// The testbench is compiled without libstdc++, so these definitions are intended to stand-in for
+// those typically provided by libstdc++'s <new>.
 //
 // Note: Hopefully, this is not UB - technically, this is not displacing the standard library's
-// placement new since the testbench does not bring in libc++.
+// placement new since the testbench does not bring in libstdc++.
 //
 [[nodiscard]] auto operator new(::size_t, void* ptr) noexcept -> void*
 {
