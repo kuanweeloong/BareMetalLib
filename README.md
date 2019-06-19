@@ -42,6 +42,8 @@ BML requires a C++17 conforming compiler. It is tested on the following platform
 | aarch64      | Debian Buster (*arm64*) | GCC 8.3.0   |
 | armv7l       | Debian Buster (*armhf*) | Clang 6.0.1 |
 | armv7l       | Debian Buster (*armhf*) | GCC 8.3.0   |
+| armv5l       | Debian Buster (*armel*) | Clang 6.0.1 |
+| armv5l       | Debian Buster (*armel*) | GCC 8.3.0   |
 
 ## License
 BML is licensed under the Apache 2.0 License with LLVM exceptions. For more details, see
