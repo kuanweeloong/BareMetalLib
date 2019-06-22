@@ -124,9 +124,9 @@ namespace bml
             // variant should be not copy assignable if at least one alternative is not copy
             // constructible or copy assignable (copy construction is needed when assigning variants
             // that hold alternatives at different indices); otherwise, it should be trivially copy
-            // assignable if all alternatives are trivially copy constructible and trivially
-            // destructible (the assignee's destructor needs to run when copy assigning variants
-            // holding alternatives at different indices).
+            // assignable if all alternatives are trivially copy assignable, trivially copy
+			// constructible and trivially destructible (the assignee's destructor needs to run when
+			// copy assigning variants holding alternatives at different indices).
             template <typename... Ts>
             constexpr auto copy_assign_trait() noexcept -> trait
             {
@@ -155,9 +155,9 @@ namespace bml
             // variant should be not move assignable if at least one alternative is not move
             // constructible or move assignable (move construction is needed when assigning variants
             // that hold alternatives at different indices); otherwise, it should be trivially move
-            // assignable if all alternatives are trivially move constructible and trivially
-            // destructible (the assignee's destructor needs to run when move assigning variants
-            // holding alternatives at different indices).
+            // assignable if all alternatives are trivially move assignable, trivivally move
+			// constructible and trivially destructible (the assignee's destructor needs to run when
+			// move assigning variants holding alternatives at different indices).
             template <typename... Ts>
             constexpr auto move_assign_trait() noexcept -> trait
             {
