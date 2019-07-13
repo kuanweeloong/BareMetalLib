@@ -1127,13 +1127,13 @@ auto test_main() noexcept -> int
     {
         // "Move-assignable" since the T is still copy-assignable - overload resolution selects move
         // assignment operator.
-        static_assert(bml::is_move_assignable_v<bml::variant<copyable_no_move_assign>>);
+        static_assert(bml::is_move_assignable_v<bml::optional<copyable_no_move_assign>>);
         
         // Not move-assignable since the T is both not move-assignable and not move-constructible.
-        static_assert(!bml::is_move_assignable_v<bml::variant<int const>>);
-        static_assert(!bml::is_move_assignable_v<bml::variant<no_move_assign>>);
-        static_assert(!bml::is_move_assignable_v<bml::variant<implicit_no_move_assign>>);
-        static_assert(!bml::is_move_assignable_v<bml::variant<triv_move_assign const>>);
+        static_assert(!bml::is_move_assignable_v<bml::optional<int const>>);
+        static_assert(!bml::is_move_assignable_v<bml::optional<no_move_assign>>);
+        static_assert(!bml::is_move_assignable_v<bml::optional<implicit_no_move_assign>>);
+        static_assert(!bml::is_move_assignable_v<bml::optional<triv_move_assign const>>);
     }
     
     // Check that optional's move assignment is trivial if T's move assignment, move constructor and
