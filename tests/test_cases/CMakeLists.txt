@@ -57,3 +57,5 @@ add_subdirectory(containers)
 add_subdirectory(detail)
 add_subdirectory(type_traits)
 add_subdirectory(utilities)
+
+bml_add_test("basic_types.consolidated_header" basic_types.consolidated_header.cpp)
