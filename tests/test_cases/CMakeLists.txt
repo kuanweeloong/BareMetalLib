@@ -59,3 +59,4 @@ add_subdirectory(type_traits)
 add_subdirectory(utilities)
 
 bml_add_test("basic_types.consolidated_header" basic_types.consolidated_header.cpp)
+bml_add_test("type_traits.consolidated_header" type_traits.consolidated_header.cpp)
