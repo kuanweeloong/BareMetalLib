@@ -22,7 +22,7 @@ namespace bml
     template <::ptrdiff_t I>
     struct in_place_index_ty
     {
-        explicit in_place_index_ty() = default;
+        constexpr explicit in_place_index_ty() noexcept = default;
     };
     
     //

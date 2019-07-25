@@ -19,7 +19,7 @@ namespace bml
     //
     struct in_place_ty
     {
-        explicit in_place_ty() = default;
+        constexpr explicit in_place_ty() noexcept = default;
     };
 
     //

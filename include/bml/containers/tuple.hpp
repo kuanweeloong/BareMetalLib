@@ -77,10 +77,12 @@ namespace bml
 		{
 			disable_copy_ctor(disable_copy_ctor const&) = delete;
 			
-			disable_copy_ctor() = default;
-			disable_copy_ctor(disable_copy_ctor&&) = default;
-			auto operator=(disable_copy_ctor const&) -> disable_copy_ctor& = default;
-			auto operator=(disable_copy_ctor&&) -> disable_copy_ctor& = default;
+			constexpr disable_copy_ctor() noexcept = default;
+			constexpr disable_copy_ctor(disable_copy_ctor&&) noexcept = default;
+			constexpr auto operator=(disable_copy_ctor const&) noexcept -> disable_copy_ctor&
+				= default;
+			constexpr auto operator=(disable_copy_ctor&&) noexcept -> disable_copy_ctor&
+				= default;
 		};
 		
 		// Helper function to determine the type of element storage to be instantiated.
@@ -229,7 +231,7 @@ namespace bml
 		template <::ptrdiff_t Index, typename T>
 		struct leaf<Index, T, leaf_type::ebo> : T
 		{
-			leaf() = default;
+			constexpr leaf() noexcept = default;
 			
 			template <typename Value>
 			constexpr leaf(in_place_ty, Value&& v) noexcept : T(bml::forward<Value>(v)) {}
@@ -262,7 +264,7 @@ namespace bml
 		template <::ptrdiff_t... Is, typename... Ts>
 		struct impl<index_sequence<Is...>, Ts...> : leaf<Is, Ts>...
 		{
-			impl() = default;
+			constexpr impl() noexcept = default;
 			
 			template <typename... Values>
 			constexpr impl(in_place_ty, Values&&... vs) noexcept
@@ -457,7 +459,7 @@ namespace bml
 	{
 	public:
 	
-		tuple() = default;
+		constexpr tuple() noexcept = default;
 		constexpr auto swap(tuple&) noexcept -> void {}
 		
 	};

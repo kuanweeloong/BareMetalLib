@@ -577,7 +577,7 @@ namespace bml
         
         #define BML_VARIANT_ALT_UNION_ADD_MOVE_CTOR(...)                       \
             BML_VARIANT_ALT_UNION_ADD_COPY_CTOR(sp_mem::trait::trivial,        \
-                alt_union(alt_union const&) = default;,                        \
+                constexpr alt_union(alt_union const&) noexcept = default;,     \
                 __VA_ARGS__)                                                   \
                                                                                \
             BML_VARIANT_ALT_UNION_ADD_COPY_CTOR(sp_mem::trait::unavailable,    \
@@ -590,7 +590,7 @@ namespace bml
         
         #define BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(...)                  \
             BML_VARIANT_ALT_UNION_ADD_MOVE_CTOR(sp_mem::trait::trivial,     \
-                alt_union(alt_union&&) = default;,                          \
+                constexpr alt_union(alt_union&&) noexcept = default;,       \
                 __VA_ARGS__)                                                \
                                                                             \
             BML_VARIANT_ALT_UNION_ADD_MOVE_CTOR(sp_mem::trait::unavailable, \
@@ -601,25 +601,25 @@ namespace bml
                 constexpr alt_union(alt_union&&) noexcept : m_dummy() {},   \
                 __VA_ARGS__)
         
-        #define BML_VARIANT_ALT_UNION_ADD_MOVE_ASSIGN(...)                        \
-            BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(sp_mem::trait::trivial,         \
-                auto operator=(alt_union const&) -> alt_union& = default;,        \
-                __VA_ARGS__)                                                      \
-                                                                                  \
-            BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(sp_mem::trait::unavailable,     \
-                auto operator=(alt_union const&) -> alt_union& = delete;,         \
-                __VA_ARGS__)                                                      \
-                                                                                  \
-            BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(sp_mem::trait::normal,          \
-                constexpr auto operator=(alt_union const&) noexcept -> alt_union& \
-                {                                                                 \
-                    return *this;                                                 \
-                },                                                                \
+        #define BML_VARIANT_ALT_UNION_ADD_MOVE_ASSIGN(...)                                    \
+            BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(sp_mem::trait::trivial,                     \
+                constexpr auto operator=(alt_union const&) noexcept -> alt_union& = default;, \
+                __VA_ARGS__)                                                                  \
+                                                                                              \
+            BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(sp_mem::trait::unavailable,                 \
+                auto operator=(alt_union const&) -> alt_union& = delete;,                     \
+                __VA_ARGS__)                                                                  \
+                                                                                              \
+            BML_VARIANT_ALT_UNION_ADD_COPY_ASSIGN(sp_mem::trait::normal,                      \
+                constexpr auto operator=(alt_union const&) noexcept -> alt_union&             \
+                {                                                                             \
+                    return *this;                                                             \
+                },                                                                            \
                 __VA_ARGS__)
         
         #define BML_VARIANT_ALT_UNION_DEFINE_SPECIALIZATIONS                                    \
             BML_VARIANT_ALT_UNION_ADD_MOVE_ASSIGN(sp_mem::trait::trivial,                       \
-                auto operator=(alt_union&&) -> alt_union& = default;)                           \
+                constexpr auto operator=(alt_union&&) noexcept -> alt_union& = default;)        \
                                                                                                 \
             BML_VARIANT_ALT_UNION_ADD_MOVE_ASSIGN(sp_mem::trait::unavailable,                   \
                 BML_VARIANT_FUNCTION_NOT_DECLARED)                                              \
@@ -840,7 +840,7 @@ namespace bml
         
         #define BML_VARIANT_STORAGE_ADD_MOVE_CTOR(...)                    \
             BML_VARIANT_STORAGE_ADD_COPY_CTOR(sp_mem::trait::trivial,     \
-                storage(storage const&) = default;,                       \
+                constexpr storage(storage const&) noexcept = default;,    \
                 __VA_ARGS__)                                              \
                                                                           \
             BML_VARIANT_STORAGE_ADD_COPY_CTOR(sp_mem::trait::unavailable, \
@@ -856,7 +856,7 @@ namespace bml
         
         #define BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(...)                  \
             BML_VARIANT_STORAGE_ADD_MOVE_CTOR(sp_mem::trait::trivial,     \
-                storage(storage&&) = default;,                            \
+                constexpr storage(storage&&) noexcept = default;,         \
                 __VA_ARGS__)                                              \
                                                                           \
             BML_VARIANT_STORAGE_ADD_MOVE_CTOR(sp_mem::trait::unavailable, \
@@ -870,35 +870,35 @@ namespace bml
                 },                                                        \
                 __VA_ARGS__)
         
-        #define BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(...)                            \
-            BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(sp_mem::trait::trivial,             \
-                auto operator=(storage const&) -> storage& = default;,              \
-                __VA_ARGS__)                                                        \
-                                                                                    \
-            BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(sp_mem::trait::unavailable,         \
-                auto operator=(storage const&) -> storage& = delete;,               \
-                __VA_ARGS__)                                                        \
-                                                                                    \
-            BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(sp_mem::trait::normal,              \
-                constexpr auto operator=(storage const& other) noexcept -> storage& \
-                {                                                                   \
-                    assign_from_storage(other);                                     \
-                    return *this;                                                   \
-                },                                                                  \
+        #define BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(...)                                  \
+            BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(sp_mem::trait::trivial,                   \
+                constexpr auto operator=(storage const&) noexcept -> storage& = default;, \
+                __VA_ARGS__)                                                              \
+                                                                                          \
+            BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(sp_mem::trait::unavailable,               \
+                auto operator=(storage const&) -> storage& = delete;,                     \
+                __VA_ARGS__)                                                              \
+                                                                                          \
+            BML_VARIANT_STORAGE_ADD_COPY_ASSIGN(sp_mem::trait::normal,                    \
+                constexpr auto operator=(storage const& other) noexcept -> storage&       \
+                {                                                                         \
+                    assign_from_storage(other);                                           \
+                    return *this;                                                         \
+                },                                                                        \
                 __VA_ARGS__)
         
-        #define BML_VARIANT_STORAGE_DEFINE_SPECIALIZATIONS                     \
-            BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(sp_mem::trait::trivial,        \
-                auto operator=(storage&&) -> storage& = default;)              \
-                                                                               \
-            BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(sp_mem::trait::unavailable,    \
-                BML_VARIANT_FUNCTION_NOT_DECLARED)                             \
-                                                                               \
-            BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(sp_mem::trait::normal,         \
-                constexpr auto operator=(storage&& other) noexcept -> storage& \
-                {                                                              \
-                    assign_from_storage(bml::move(other));                     \
-                    return *this;                                              \
+        #define BML_VARIANT_STORAGE_DEFINE_SPECIALIZATIONS                           \
+            BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(sp_mem::trait::trivial,              \
+                constexpr auto operator=(storage&&) noexcept -> storage& = default;) \
+                                                                                     \
+            BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(sp_mem::trait::unavailable,          \
+                BML_VARIANT_FUNCTION_NOT_DECLARED)                                   \
+                                                                                     \
+            BML_VARIANT_STORAGE_ADD_MOVE_ASSIGN(sp_mem::trait::normal,               \
+                constexpr auto operator=(storage&& other) noexcept -> storage&       \
+                {                                                                    \
+                    assign_from_storage(bml::move(other));                           \
+                    return *this;                                                    \
                 })
         
         BML_VARIANT_STORAGE_DEFINE_SPECIALIZATIONS
