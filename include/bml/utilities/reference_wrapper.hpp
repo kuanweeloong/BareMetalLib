@@ -61,7 +61,7 @@ namespace bml
         //
         constexpr reference_wrapper(reference_wrapper const& other) noexcept = default;
         constexpr auto operator=(reference_wrapper const& other) noexcept -> reference_wrapper&
-			= default;
+            = default;
         
         //
         // Provides access to the stored reference.

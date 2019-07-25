@@ -36,11 +36,11 @@ auto check_result_default() noexcept -> void
     
     static_assert(bml::is_same_v<bml::aligned_storage_ty<Len>, T>);
     static_assert(bml::is_trivial_v<T>);
-	
-	// TODO: GCC on armv5l emits -Wignored-attribute if bml::is_standard_layout_v is used. Queer.
-	// Switch back to bml::is_standard_layout_v when this issue is resolved. 
+    
+    // TODO: GCC on armv5l emits -Wignored-attribute if bml::is_standard_layout_v is used. Queer.
+    // Switch back to bml::is_standard_layout_v when this issue is resolved. 
     static_assert(bml::is_standard_layout<T>::value);
-	
+    
     static_assert(alignof(T) == alignof(::max_align_t));
     static_assert(sizeof(T) >= Len);
 }

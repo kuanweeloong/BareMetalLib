@@ -113,12 +113,12 @@ extern "C" [[noreturn]] auto _start() noexcept -> void
 {
     constexpr auto EXIT_SYSCALL_NUM = 93;
     
-	// Cast return code to 64-bit since we're using a X register.
+    // Cast return code to 64-bit since we're using a X register.
     auto ret = static_cast<long long>(test_main());
-	
+    
     __asm__ ("mov x0, %[ret]\n\t"
-		"mov x8, %[exit_num]\n\t"
-		"svc #0"
+        "mov x8, %[exit_num]\n\t"
+        "svc #0"
         :
         : [ret] "r" (ret), [exit_num] "N" (EXIT_SYSCALL_NUM)
         : "x0", "x8");
@@ -138,13 +138,13 @@ namespace bmltb
         constexpr auto STDOUT_NUM = 1;
         
         __asm__ ("mov x0, %[fd]\n\t"
-			"mov x1, %[buf]\n\t"
-			"mov x2, %[size]\n\t"
-			"mov x8, %[write_num]\n\t"
-			"svc #0"
+            "mov x1, %[buf]\n\t"
+            "mov x2, %[size]\n\t"
+            "mov x8, %[write_num]\n\t"
+            "svc #0"
             :
             : [fd] "N" (STDOUT_NUM), [buf] "r" (buf), [size] "r" (size),
-				[write_num] "N" (WRITE_SYSCALL_NUM)
+                [write_num] "N" (WRITE_SYSCALL_NUM)
             : "x0", "x1", "x2", "x8", "memory");
     }
 }

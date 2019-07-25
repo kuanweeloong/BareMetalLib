@@ -113,14 +113,14 @@ extern "C" [[noreturn]] auto _start() noexcept -> void
 {
     constexpr auto EXIT_SYSCALL_NUM = 1;
     
-	// r7 cannot be clobbered as GCC uses it for the frame pointer in thumb mode. So we save and
-	// restore it before exiting the inline asm block.
+    // r7 cannot be clobbered as GCC uses it for the frame pointer in thumb mode. So we save and
+    // restore it before exiting the inline asm block.
     auto ret = test_main();
     __asm__ ("mov r8, r7\n\t"
-		"mov r0, %[ret]\n\t"
-		"mov r7, %[exit_num]\n\t"
-		"svc #0\n\t"
-		"mov r7, r8"
+        "mov r0, %[ret]\n\t"
+        "mov r7, %[exit_num]\n\t"
+        "svc #0\n\t"
+        "mov r7, r8"
         :
         : [ret] "r" (ret), [exit_num] "I" (EXIT_SYSCALL_NUM)
         : "r0", "r8");
@@ -139,18 +139,18 @@ namespace bmltb
         constexpr auto WRITE_SYSCALL_NUM = 4;
         constexpr auto STDOUT_NUM = 1;
         
-		// r7 cannot be clobbered as GCC uses it for the frame pointer in thumb mode. So we save and
-		// restore it before exiting the inline asm block.
+        // r7 cannot be clobbered as GCC uses it for the frame pointer in thumb mode. So we save and
+        // restore it before exiting the inline asm block.
         __asm__ ("mov r8, r7\n\t"
-			"mov r0, %[fd]\n\t"
-			"mov r1, %[buf]\n\t"
-			"mov r2, %[size]\n\t"
-			"mov r7, %[write_num]\n\t"
-			"svc #0\n\t"
-			"mov r7, r8"
+            "mov r0, %[fd]\n\t"
+            "mov r1, %[buf]\n\t"
+            "mov r2, %[size]\n\t"
+            "mov r7, %[write_num]\n\t"
+            "svc #0\n\t"
+            "mov r7, r8"
             :
             : [fd] "I" (STDOUT_NUM), [buf] "r" (buf), [size] "r" (size),
-				[write_num] "I" (WRITE_SYSCALL_NUM)
+                [write_num] "I" (WRITE_SYSCALL_NUM)
             : "r0", "r1", "r2", "r8", "memory");
     }
 }

@@ -15,13 +15,13 @@
 
 auto test_main() noexcept -> int
 {
-	// Check that nullptr_ty is available.
+    // Check that nullptr_ty is available.
     {
-		static_assert([](bml::nullptr_ty)
-		{
-			return true;
-		}(nullptr));
-	}
-	
+        static_assert([](bml::nullptr_ty)
+        {
+            return true;
+        }(nullptr));
+    }
+    
     return 0;
 }

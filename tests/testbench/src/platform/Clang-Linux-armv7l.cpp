@@ -115,8 +115,8 @@ extern "C" [[noreturn]] auto _start() noexcept -> void
     
     auto ret = test_main();
     __asm__ ("mov r0, %[ret]\n\t"
-		"mov r7, %[exit_num]\n\t"
-		"svc #0"
+        "mov r7, %[exit_num]\n\t"
+        "svc #0"
         :
         : [ret] "r" (ret), [exit_num] "I" (EXIT_SYSCALL_NUM)
         : "r0", "r7");
@@ -136,13 +136,13 @@ namespace bmltb
         constexpr auto STDOUT_NUM = 1;
         
         __asm__ ("mov r0, %[fd]\n\t"
-			"mov r1, %[buf]\n\t"
-			"mov r2, %[size]\n\t"
-			"mov r7, %[write_num]\n\t"
-			"svc #0"
+            "mov r1, %[buf]\n\t"
+            "mov r2, %[size]\n\t"
+            "mov r7, %[write_num]\n\t"
+            "svc #0"
             :
             : [fd] "I" (STDOUT_NUM), [buf] "r" (buf), [size] "r" (size),
-				[write_num] "I" (WRITE_SYSCALL_NUM)
+                [write_num] "I" (WRITE_SYSCALL_NUM)
             : "r0", "r1", "r2", "r7", "memory");
     }
 }

@@ -23,10 +23,10 @@ target_include_directories(bml_testbench PUBLIC include)
 # beacuse of cases such as:
 #   - Building on an x86 OS running on an x86_64 processor.
 #   - CMAKE_SYSTEM_PROCESSOR or the architecture itself being a bit finicky with names (e.g. x86
-# 	  having different revisions such as i386, i486 etc).
+#     having different revisions such as i386, i486 etc).
 # If BML_TESTBENCH_ARCH is not explicitly defined, it defaults to CMAKE_SYSTEM_PROCESSOR.
 set(BML_TESTBENCH_ARCH "${CMAKE_SYSTEM_PROCESSOR}" CACHE STRING
-	"Architecture for which the BML testbench should target. Defaults to CMAKE_SYSTEM_PROCESSOR.")
+    "Architecture for which the BML testbench should target. Defaults to CMAKE_SYSTEM_PROCESSOR.")
 mark_as_advanced(BML_TESTBENCH_ARCH)
 
 target_sources(bml_testbench PRIVATE

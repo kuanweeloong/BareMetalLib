@@ -20,4 +20,4 @@ RUN mkdir -p /bml/build
 WORKDIR /bml/build
 
 CMD ["/bin/bash", "-c", \
-	 "cmake -DBML_BUILD_TESTS=ON -DBML_TESTBENCH_ARCH=i386 ../src && make && ctest"]
+     "cmake -DBML_BUILD_TESTS=ON -DBML_TESTBENCH_ARCH=i386 ../src && make && ctest"]
