@@ -1109,26 +1109,28 @@ namespace bml
     // behavior is undefined if v.index() is not I (since BML is noexcept).
     //
     template <::ptrdiff_t I, typename... Ts>
-    constexpr auto get(variant<Ts...>& v) noexcept -> variant_alternative_ty<I, variant<Ts...>>&
+    [[nodiscard]] constexpr auto get(variant<Ts...>& v) noexcept
+        -> variant_alternative_ty<I, variant<Ts...>>&
     {
         return v.template get<I>();
     }
     
     template <::ptrdiff_t I, typename... Ts>
-    constexpr auto get(variant<Ts...> const& v) noexcept
+    [[nodiscard]] constexpr auto get(variant<Ts...> const& v) noexcept
         -> variant_alternative_ty<I, variant<Ts...>> const&
     {
         return v.template get<I>();
     }
     
     template <::ptrdiff_t I, typename... Ts>
-    constexpr auto get(variant<Ts...>&& v) noexcept -> variant_alternative_ty<I, variant<Ts...>>&&
+    [[nodiscard]] constexpr auto get(variant<Ts...>&& v) noexcept
+        -> variant_alternative_ty<I, variant<Ts...>>&&
     {
         return bml::move(v).template get<I>();
     }
     
     template <::ptrdiff_t I, typename... Ts>
-    constexpr auto get(variant<Ts...> const&& v) noexcept
+    [[nodiscard]] constexpr auto get(variant<Ts...> const&& v) noexcept
         -> variant_alternative_ty<I, variant<Ts...>> const&&
     {
         return bml::move(v).template get<I>();
