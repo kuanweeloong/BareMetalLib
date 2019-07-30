@@ -29,7 +29,7 @@ namespace bml
     constexpr auto swap(T& x, T& y) noexcept
         -> enable_if_ty<is_move_constructible_v<T> && is_move_assignable_v<T>>
     {
-        T t(bml::move(x));
+        auto t = T(bml::move(x));
         x = bml::move(y);
         y = bml::move(t);
     }
