@@ -27,8 +27,8 @@ namespace bml
     {
         static_assert(Len >= 0, "Len cannot be negative.");
         
-        using type = aligned_storage_ty<bml::max(Len, size_of_v<Ts>...),
-            bml::max(alignment_of_v<Ts>...)>;
+        static constexpr auto alignment_value = ::ptrdiff_t(bml::max(alignment_of_v<Ts>...));
+        using type = aligned_storage_ty<bml::max(Len, size_of_v<Ts>...), alignment_value>;
     };
     
     //

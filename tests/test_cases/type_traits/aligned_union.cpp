@@ -30,6 +30,12 @@ auto check_result() noexcept -> void
     static_assert(sizeof(T) >= bml::max(Len, sizeof(Ts)...));
 }
 
+template <typename... Ts>
+auto check_alignment_value() noexcept -> void
+{
+    static_assert(bml::aligned_union<1, Ts...>::alignment_value == bml::max(alignof(Ts)...));
+}
+
 struct alignas(64) aligned_64_size_10 { char c[10]; };
 
 auto test_main() noexcept -> int
@@ -57,6 +63,18 @@ auto test_main() noexcept -> int
         check_result<3, char, char, char[5]>();
         check_result<3, char, char[5], aligned_64_size_10>();
         check_result<3, char[5], char, char[10], aligned_64_size_10, char[5]>();
+    }
+    
+    // Check that alignment_value contains the strictest alignment of all types in Ts....
+    {
+        check_alignment_value<char[5]>();
+        check_alignment_value<char[10]>();
+        check_alignment_value<aligned_64_size_10>();
+        
+        check_alignment_value<char[5], char[5]>();
+        check_alignment_value<char, char, char[5]>();
+        check_alignment_value<char, char[5], aligned_64_size_10>();
+        check_alignment_value<char[5], char, char[10], aligned_64_size_10, char[5]>();
     }
     
     return 0;
