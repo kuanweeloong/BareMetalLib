@@ -46,9 +46,13 @@ BML requires a C++17 conforming compiler. It is tested on the following platform
 | armv5l       | Debian Buster (*armel*) | GCC 8.3.0   |
 
 ## License
-BML is licensed under the Apache 2.0 License with LLVM exceptions. For more details, see
-[LICENSE.md](LICENSE.md).
+BML's code is licensed under the [Apache 2.0 License with LLVM exceptions][4]. BML's documentation,
+which encompasses all content in the `docs/` directory, is licensed under [CC BY-SA 4.0][5].
+
+For more details, see [LICENSE.md](LICENSE.md).
 
 [1]: https://travis-ci.org/kuanweeloong/BareMetalLib
 [2]: https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-mix
 [3]: https://libcxx.llvm.org/
+[4]: https://llvm.org/foundation/relicensing/LICENSE.txt
+[5]: https://creativecommons.org/licenses/by-sa/4.0
