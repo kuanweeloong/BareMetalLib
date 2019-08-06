@@ -104,7 +104,12 @@ struct derived1 : base {};
 struct derived2 : base {};
 
 template <typename T>
-struct user_spec {};
+struct user_spec
+{
+    // This needs to be explicitly convertible from T to prevent it from being "discovered" by the
+    // conditional operator.
+    explicit user_spec(T const&) {}
+};
 
 namespace bml
 {
