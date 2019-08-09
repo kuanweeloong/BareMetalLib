@@ -12,7 +12,6 @@
 
 #pragma once
 #include <stddef.h>
-#include "../type_traits/is_integral.hpp"
 #include "../detail/size_to_ptrdiff.hpp"
 
 namespace bml
@@ -23,8 +22,6 @@ namespace bml
     template <typename T, T... Is>
     struct integer_sequence
     {
-        static_assert(is_integral_v<T>, "T is not integral.");
-        
         using value_type = T;
         
         [[nodiscard]] static constexpr auto size() noexcept -> ::ptrdiff_t
