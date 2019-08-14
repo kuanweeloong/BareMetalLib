@@ -21,5 +21,5 @@ namespace bml
     // detected_ty for POSIX compatibility.
     //
     template <template <typename...> typename Op, typename... Args>
-    using detected_ty = typename detected_or<bml::nonesuch, Op, Args...>::type;
+    using detected_ty = typename detected_or<nonesuch, Op, Args...>::type;
 }
