@@ -36,11 +36,12 @@ namespace bml
     }
     
     //
-    // See Library Fundamentals TS v3's std::experimental::detected_or, except that the value_t
-    // member type alias is named value_ty for POSIX compatibility.
+    // See Library Fundamentals TS v3's std::experimental::detected_or, except that this is a struct
+    // instead of a type alias, and the member type alias value_t is named value_ty for POSIX
+    // compatibility.
     //
     template <typename Default, template <typename...> typename Op, typename... Args>
-    using detected_or = detail::detected_or_detail::impl<Default, void, Op, Args...>;
+    struct detected_or : detail::detected_or_detail::impl<Default, void, Op, Args...> {};
     
     //
     // See Library Fundamentals TS v3's std::experimental::detected_or_t, except that this is named

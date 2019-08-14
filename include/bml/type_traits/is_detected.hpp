@@ -17,10 +17,11 @@
 namespace bml
 {
     //
-    // See Library Fundamentals TS v3's std::experimental::is_detected.
+    // See Library Fundamentals TS v3's std::experimental::is_detected, except that this is a struct
+    // instead of a type alias.
     //
     template <template <typename...> typename Op, typename... Args>
-    using is_detected = typename detected_or<nonesuch, Op, Args...>::value_ty;
+    struct is_detected : detected_or<nonesuch, Op, Args...>::value_ty {};
 
     //
     // See Library Fundamentals TS v3's std::experimental::is_detected_v.

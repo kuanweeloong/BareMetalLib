@@ -30,13 +30,13 @@ auto test_main() noexcept -> int
 {
     // Check that is_detected is true when detection succeeds.
     {
-        static_assert(bml::is_same_v<bml::is_detected<foo_type, has_foo>, bml::true_type>);
+        static_assert(bml::is_detected<foo_type, has_foo>::value);
         static_assert(bml::is_detected_v<foo_type, has_foo>);
     }
     
     // Check that is_detected is false when detection fails.
     {
-        static_assert(bml::is_same_v<bml::is_detected<foo_type, no_foo>, bml::false_type>);
+        static_assert(!bml::is_detected<foo_type, no_foo>::value);
         static_assert(!bml::is_detected_v<foo_type, no_foo>);
     }
 
