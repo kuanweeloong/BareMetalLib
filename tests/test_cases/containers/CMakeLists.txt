@@ -27,6 +27,10 @@ bml_add_compile_failure_test("containers.variant.fail.array_alt"
     variant.fail.array_alt.cpp "variant cannot hold array types.")
 bml_add_compile_failure_test("containers.variant.fail.ref_alt"
     variant.fail.ref_alt.cpp "variant cannot hold reference types.")
+bml_add_compile_failure_test("containers.variant.fail.variant_size_non_variant"
+    variant.fail.variant_size_non_variant.cpp)
+bml_add_compile_failure_test("containers.variant.fail.variant_alternative_non_variant"
+    variant.fail.variant_alternative_non_variant.cpp)
 bml_add_test("containers.optional" optional.cpp)
 bml_add_compile_failure_test("containers.optional.fail.in_place_ty"
     optional.fail.in_place_ty.cpp "optional cannot hold in_place_ty.")
@@ -43,3 +47,7 @@ bml_add_compile_failure_test("containers.tuple.fail.mem_get_invalid_index"
     tuple.fail.mem_get_invalid_index.cpp "tuple index is out of bounds.")
 bml_add_compile_failure_test("containers.tuple.fail.free_get_invalid_index"
     tuple.fail.free_get_invalid_index.cpp "tuple index is out of bounds.")
+bml_add_compile_failure_test("containers.tuple.fail.tuple_size_non_tuple"
+    tuple.fail.tuple_size_non_tuple.cpp)
+bml_add_compile_failure_test("containers.tuple.fail.tuple_element_non_tuple"
+    tuple.fail.tuple_element_non_tuple.cpp)

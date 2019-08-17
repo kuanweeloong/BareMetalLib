@@ -293,10 +293,11 @@ namespace bml
     }
     
     //
-    // See std::tuple_size, except that this exposes the size as ptrdiff_t instead of size_t.
+    // See std::tuple_size, except that this exposes the size as ptrdiff_t instead of size_t, and
+    // specializations for cv-qualified `T` are not SFINAE friendly.
     //
     template <typename T>
-    struct tuple_size {};
+    struct tuple_size;
     
     template <typename... Ts>
     struct tuple_size<tuple<Ts...>> : pack_size<Ts...> {};
