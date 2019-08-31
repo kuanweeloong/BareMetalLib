@@ -20,7 +20,4 @@ namespace bml::detail::addressof_detail
     {
         return __builtin_addressof(arg);
     }
-
-    template <typename T>
-    auto addressof(T const&&) noexcept -> T const* = delete;
 }

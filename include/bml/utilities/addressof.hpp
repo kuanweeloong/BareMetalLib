@@ -20,4 +20,7 @@ namespace bml
     // See std::addressof, except that this has been annotated with nodiscard.
     //
     using detail::addressof_detail::addressof;
+    
+    template <typename T>
+    auto addressof(T const&&) noexcept -> T const* = delete;
 }
