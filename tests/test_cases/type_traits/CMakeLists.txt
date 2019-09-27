@@ -128,3 +128,18 @@ bml_add_test("type_traits.is_invocable" is_invocable.cpp)
 bml_add_test("type_traits.common_type" common_type.cpp)
 bml_add_test("type_traits.is_list_convertible" is_list_convertible.cpp)
 bml_add_test("type_traits.is_explicitly_constructible" is_explicitly_constructible.cpp)
+
+# Compiler-specific tests.
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL Clang)
+    bml_add_test("type_traits.is_integral.clang" is_integral.clang.cpp)
+endif()
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL GNU)
+    bml_add_test("type_traits.is_integral.gcc.extensions_off" is_integral.gcc.extensions_off.cpp)
+    set_target_properties("bml.tests.type_traits.is_integral.gcc.extensions_off" PROPERTIES
+        CXX_EXTENSIONS OFF)
+
+    bml_add_test("type_traits.is_integral.gcc.extensions_on" is_integral.gcc.extensions_on.cpp)
+    set_target_properties("bml.tests.type_traits.is_integral.gcc.extensions_on" PROPERTIES
+        CXX_EXTENSIONS ON)
+endif()
