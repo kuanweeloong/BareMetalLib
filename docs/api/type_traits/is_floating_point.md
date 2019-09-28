@@ -1,0 +1,40 @@
+# `<bml/type_traits/is_floating_point.hpp>`
+#### Table of Contents
+- [`is_floating_point`](#is_floating_point)
+
+## `is_floating_point`
+```c++
+template <typename T>
+struct is_floating_point;
+
+template <typename T>
+constexpr auto is_floating_point_v = bool(is_floating_point<T>::value);
+```
+Checks if `T` is a floating-point type. This has a base characteristic of `bml::true_type` if `T`
+is a floating-point type, and `bml::false_type` otherwise.
+
+The following types, and their cv-qualified variants, are floating-point types:
+
+- `float`
+- `double`
+- `long double`
+
+Both `is_floating_point` and `is_floating_point_v` are similar to `std::is_floating_point` and
+`std::is_floating_point_v`, respectively.
+
+#### Public base classes
+```c++
+/* See comments. */
+```
+Defined as follows:
+
+- `bml::true_type` if `T` is a floating-point type.
+- `bml::false_type` otherwise.
+
+---
+*This documentation is licensed under [CC BY-SA 4.0][1]. It includes content adapted from
+[cppreference.com][2], which is licensed under [CC BY-SA 3.0][3].*
+
+[1]: https://creativecommons.org/licenses/by-sa/4.0
+[2]: https://en.cppreference.com
+[3]: https://creativecommons.org/licenses/by-sa/3.0
