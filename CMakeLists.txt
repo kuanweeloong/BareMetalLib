@@ -15,7 +15,7 @@
 # (https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/).
 
 cmake_minimum_required(VERSION 3.10)
-project(BareMetalLib VERSION 0.0.0 LANGUAGES CXX)
+project(BareMetalLib VERSION 0.1.0 LANGUAGES CXX)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
@@ -31,10 +31,6 @@ target_include_directories(bml INTERFACE
 install(DIRECTORY include/ DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
 # Perform incantations to transform BML into a config-file package.
-#
-# Note: For now, "COMPATIBILITY ExactVersion" is a lie. We're in pre-release, so there are no
-# compatibility guarantees. This section is just here to avoid having to remember/google these
-# incantations in the future. (This is also why BML's version is set to 0.0.0.)
 install(TARGETS bml EXPORT bml_targets)
 install(EXPORT bml_targets NAMESPACE BareMetalLib::
     FILE BareMetalLibTargets.cmake
