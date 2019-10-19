@@ -137,7 +137,6 @@ auto test_main() noexcept -> int
         check_constructible<int&, explicit_to<int&>>();
         check_constructible<int const&, explicit_to<int&>>();
         check_constructible<int const&, explicit_to<int&>&>();
-        check_constructible<int const&, explicit_to<int&&>>();
         check_constructible<int&&, explicit_to<int&&>>();
     }
     
