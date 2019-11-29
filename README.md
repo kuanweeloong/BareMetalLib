@@ -50,7 +50,7 @@ Copy `include/bml` into your project's include path and include a BML header to 
 usage examples:
 
 #### Finding the minimum and maximum of several integers
-This example find the minimum and maximum of 4 integers and returns them in a tuple.
+This example finds the minimum and maximum of 4 integers and returns them in a tuple.
 
 > ```c++
 > #include <bml/containers.hpp>
