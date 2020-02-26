@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -291,11 +288,7 @@ namespace bml
             }
         };
     }
-    
-    //
-    // See std::tuple_size, except that this exposes the size as ptrdiff_t instead of size_t, and
-    // specializations for cv-qualified `T` are not SFINAE friendly.
-    //
+
     template <typename T>
     struct tuple_size;
     
@@ -310,16 +303,10 @@ namespace bml
     
     template <typename T>
     struct tuple_size<T const volatile> : tuple_size<T> {};
-    
-    //
-    // See std::tuple_size_v, except that this exposes the size as ptrdiff_t instead of size_t.
-    //
+
     template <typename T>
     inline constexpr auto tuple_size_v = ::ptrdiff_t(tuple_size<T>::value);
-    
-    //
-    // See std::tuple_element, except that this uses ptrdiff_t for the index.
-    //
+
     template <::ptrdiff_t I, typename T>
     struct tuple_element;
     
@@ -340,26 +327,9 @@ namespace bml
     template <::ptrdiff_t I, typename T>
     struct tuple_element<I, T const volatile> : add_cv<typename tuple_element<I, T>::type> {};
     
-    //
-    // See std::tuple_element_ty, except that this uses ptrdiff_t for the index, and is named
-    // tuple_element_ty for POSIX compatibility.
-    //
     template <::ptrdiff_t I, typename T>
     using tuple_element_ty = typename tuple_element<I, T>::type;
-    
-    //
-    // A tuple type similar to std::tuple, except that this does not support:
-    //
-    // 1. uses-allocator construction.
-    // 2. construction or assignment from pairs (since pair is not a distinct BML type).
-    //
-    // There are also several features that are not yet supported, but in the pipeline to be done
-    // soon (tm):
-    //
-    // 1. Converting assignments.
-    // 2. Element access by type.
-    // 3. Comparison operators.
-    //
+
     template <typename... Ts>
     class tuple : detail::tuple_detail::impl<make_index_sequence<pack_size_v<Ts...>>, Ts...>
     {
@@ -368,13 +338,7 @@ namespace bml
         using base = detail::tuple_detail::impl<make_index_sequence<pack_size_v<Ts...>>, Ts...>;
         
     public:
-    
-        //
-        // Default constructs the tuple by value-initializing all stored elements. This does not
-        // participate in overload resolution unless all types in are Ts... default constructible.
-        // In addition, this is marked explicit if at least one type in Ts... is not implicitly
-        // default-constructible.
-        //
+
         template <bool AlwaysTrue = true, enable_if_ty<AlwaysTrue
             && conjunction_v<is_default_constructible<Ts>...>
             && conjunction_v<is_list_convertible<Ts>...>>* = nullptr>
@@ -384,21 +348,7 @@ namespace bml
             && conjunction_v<is_default_constructible<Ts>...>
             && !conjunction_v<is_list_convertible<Ts>...>>* = nullptr>
         constexpr explicit tuple() noexcept {}
-        
-        //
-        // Constructs the tuple by initializing each element with the corresponding value in
-        // forward<Values>(vs).... This does not participate in overload resolution unless:
-        //
-        // 1. This does not conflict with the copy and move constructors (i.e. sizeof...(Values)
-        //    != 1 or the only type in Values... is not the same as tuple after removing ref and
-        //    cv-qualifers).
-        // 2. sizeof...(Values) == sizeof...(Ts) (this also ensures that this constructor will not
-        //    conflict with the default constructor, if that is enabled).
-        // 3. All types in Ts... are constructible from their corresponding type in Values....
-        // 
-        // In addition, this is marked explicit if at least one type in Ts... is explicitly
-        // constructible from its corresponding type in Values....
-        //
+
         template <typename... Values, enable_if_ty<
             detail::tuple_detail::no_special_ctor_conflict<tuple, Values...>::value
             && pack_size_v<Values...> == pack_size_v<Ts...>
@@ -414,11 +364,7 @@ namespace bml
             && !conjunction_v<is_convertible<Values, Ts>...>>* = nullptr>
         explicit constexpr tuple(Values&&... vs) noexcept
             : base(in_place, bml::forward<Values>(vs)...) {}
-        
-        //
-        // Indexed accessor for the I-th element in the tuple. The program is ill-formed if I is
-        // negative or if sizeof...(Ts) >= I.
-        //
+
         template <::ptrdiff_t I>
         [[nodiscard]] constexpr auto get() & noexcept -> tuple_element_ty<I, tuple>&
         {
@@ -442,11 +388,7 @@ namespace bml
         {
             return bml::move(static_cast<base const&>(*this).template get<I>());
         }
-        
-        //
-        // Swaps the elements stored by this tuple with the values stored by the argument tuple.
-        // This does not participate in overload resolution unless all types in Ts... are swappable.
-        //
+
         template <bool AlwaysTrue = true, typename = enable_if_ty<AlwaysTrue
             && conjunction_v<is_swappable<Ts>...>>>
         constexpr auto swap(tuple& other) noexcept -> void
@@ -467,10 +409,7 @@ namespace bml
     
     template <typename... Ts>
     tuple(Ts...) -> tuple<Ts...>;
-    
-    //
-    // See std::get for tuples, except that this uses ptrdiff_t for the index.
-    //
+
     template <::ptrdiff_t I, typename... Ts>
     [[nodiscard]] constexpr auto get(tuple<Ts...>& t) noexcept
         -> tuple_element_ty<I, tuple<Ts...>>&
@@ -498,10 +437,7 @@ namespace bml
     {
         return bml::move(t).template get<I>();
     }
-    
-    //
-    // See std::swap for tuples.
-    //
+
     template <typename... Ts>
     constexpr auto swap(tuple<Ts...>& lhs, tuple<Ts...>& rhs) noexcept -> decltype(lhs.swap(rhs))
     {

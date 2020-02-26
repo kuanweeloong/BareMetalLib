@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -920,10 +917,7 @@ namespace bml
         template <typename... Ts>
         struct is_variant<bml::variant<Ts...>> : true_type {};
     }
-    
-    //
-    // See std::variant_size, except that this exposes the size as ptrdiff_t instead of size_t.
-    //
+
     template <typename T>
     struct variant_size;
     
@@ -938,16 +932,10 @@ namespace bml
     
     template <typename... Ts>
     struct variant_size<variant<Ts...>> : pack_size<Ts...> {};
-    
-    //
-    // See std::variant_size_v, except that this exposes the size as ptrdiff_t instead of size_t.
-    //
+
     template <typename T>
     inline constexpr auto variant_size_v = ::ptrdiff_t(variant_size<T>::value);
-    
-    //
-    // See std::variant_alternative, except that this uses ptrdiff_t for the index.
-    //
+
     template <::ptrdiff_t I, typename T>
     struct variant_alternative;
     
@@ -971,30 +959,9 @@ namespace bml
         using type = type_pack_element_ty<I, Ts...>;
     };
     
-    //
-    // See std::variant_alternative_t, except that this uses ptrdiff_t for the index, and is named
-    // variant_alternative_ty for POSIX compatibility.
-    //
     template <::ptrdiff_t I, typename T>
     using variant_alternative_ty = typename variant_alternative<I, T>::type;
-    
-    //
-    // A tagged union that is mostly similar to std::variant.
-    //
-    // This differs from std::variant in that:
-    // 
-    // 1. This does not support any member function overloads that take in std::initializer_list
-    //    (since BML does not assume that the C++ standard library is available).
-    // 2. This does not have a valueless_by_exception state, since BML is noexcept.
-    //
-    // There are also several features that are not yet supported, but in the pipeline to be done
-    // soon (tm):
-    // 
-    // 1. Type-based instead of index-based construction/emplace.
-    // 2. Default construction.
-    // 3. Coverting constructors and assignment.
-    // 4. Comparison operators.
-    //
+
     template <typename... Ts>
     class variant
     {
@@ -1017,11 +984,6 @@ namespace bml
         static_assert(!disjunction_v<is_array<Ts>...>, "variant cannot hold array types.");
         static_assert(!disjunction_v<is_reference<Ts>...>, "variant cannot hold reference types.");
         
-        //
-        // Constructs the I-th alternative via direct-non-list-initialization with forward<Args>(
-        // args).... This does not participate in overload resolution the I-th alternative is
-        // constructible from Args....
-        //
         template <::ptrdiff_t I, typename... Args, typename = enable_if_ty<
             (0 <= I && I < variant_size_v<variant>)
             && is_constructible_v<variant_alternative_ty<I, variant>, Args...>>>
@@ -1029,11 +991,6 @@ namespace bml
             : m_storage(in_place_index<I>, bml::forward<Args>(args)...)
         {}
         
-        //
-        // Destroys the currently contained value and constructs the I-th alternative via
-        // direct-non-list initialization with forward<Args>(args).... This does not participate in
-        // overload resolution unless the I-th alternative is constructible from Args....
-        //
         template <::ptrdiff_t I, typename... Args, typename = enable_if_ty<
             is_constructible_v<variant_alternative_ty<I, variant>, Args...>>>
         auto emplace(Args&&... args) noexcept -> variant_alternative_ty<I, variant>&
@@ -1041,19 +998,11 @@ namespace bml
             return m_storage.template emplace<I>(bml::forward<Args>(args)...);
         }
         
-        //
-        // Gets the index of the currently stored alternative.
-        //
         [[nodiscard]] constexpr auto index() const noexcept -> ::ptrdiff_t
         {
             return m_storage.index();
         }
         
-        //
-        // Swaps the currently contained value with the value held by the argument variant. This
-        // does not participate in overload resolution unless all alternatives are swappable and
-        // move-constructible.
-        //
         template <bool AlwaysTrue = true, typename = enable_if_ty<AlwaysTrue
             && conjunction_v<is_swappable<Ts>...> && conjunction_v<is_move_constructible<Ts>...>>>
         auto swap(variant& other) noexcept -> void
@@ -1061,10 +1010,6 @@ namespace bml
             m_storage.swap(other.m_storage);
         }
         
-        //
-        // Indexed accessor for the I-th alternative. Its behavior is undefined if the current index
-        // is not I.
-        //
         template <::ptrdiff_t I>
         [[nodiscard]] constexpr auto get() & noexcept -> variant_alternative_ty<I, variant>&
         {   
@@ -1092,10 +1037,6 @@ namespace bml
         }
     };
     
-    //
-    // See std::visit, except that this does not participate in overload resolution unless all the
-    // types in Variants... are variants.
-    //
     template <typename Visitor, typename... Variants, typename = enable_if_ty<
         conjunction_v<detail::variant_detail::is_variant<remove_cvref_ty<Variants>>...>>>
     constexpr auto visit(Visitor&& vis, Variants&&... vars) noexcept -> decltype(auto)
@@ -1104,10 +1045,6 @@ namespace bml
             bml::forward<Variants>(vars)...);
     }
     
-    //
-    // See indexed std::get for variants, except that this uses ptrdiff_t for the index, and
-    // behavior is undefined if v.index() is not I (since BML is noexcept).
-    //
     template <::ptrdiff_t I, typename... Ts>
     [[nodiscard]] constexpr auto get(variant<Ts...>& v) noexcept
         -> variant_alternative_ty<I, variant<Ts...>>&
@@ -1136,9 +1073,6 @@ namespace bml
         return bml::move(v).template get<I>();
     }
     
-    //
-    // See std::swap for variants.
-    //
     template <typename... Ts>
     inline auto swap(variant<Ts...>& lhs, variant<Ts...> & rhs) noexcept -> decltype(lhs.swap(rhs))
     {

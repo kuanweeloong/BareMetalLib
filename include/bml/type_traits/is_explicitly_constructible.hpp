@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -41,19 +38,10 @@ namespace bml
         }
     }
     
-    //
-    // is_explicitly_constructible is a unary type trait with a base characteristic of true_type if
-    // T can be constructed from values of type Args... only via an explicit constructor. Otherwise,
-    // it has a base characteristic of false_type.
-    //
     template <typename T, typename... Args>
     struct is_explicitly_constructible
         : bool_constant<detail::is_explicitly_constructible_detail::check<T, Args...>()> {};
     
-    //
-    // is_explicitly_constructible_v is a variable template whose value is equal to 
-    // is_explicitly_constructible<T, Args...>::value.
-    //
     template <typename T, typename... Args>
     inline constexpr auto is_explicitly_constructible_v =
         bool(is_explicitly_constructible<T, Args...>::value); 

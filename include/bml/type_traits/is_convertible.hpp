@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -46,15 +43,9 @@ namespace bml
         }
     }
     
-    //
-    // See std::is_convertible.
-    //
     template <typename From, typename To>
     struct is_convertible : bool_constant<detail::is_convertible_detail::check<From, To>()> {};
     
-    //
-    // See std::is_convertible_v.
-    //
     template <typename From, typename To>
     inline constexpr auto is_convertible_v = bool(is_convertible<From, To>::value);
 }

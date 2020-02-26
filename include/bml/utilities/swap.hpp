@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -22,9 +19,6 @@
 
 namespace bml
 {
-    //
-    // See std::swap (overload for non-array types).
-    //
     template <typename T>
     constexpr auto swap(T& x, T& y) noexcept
         -> enable_if_ty<is_move_constructible_v<T> && is_move_assignable_v<T>>
@@ -41,10 +35,7 @@ namespace bml
     
     template <typename T, ::ptrdiff_t N>
     constexpr auto swap(T (&x)[N], T (&y)[N]) noexcept -> enable_if_ty<is_swappable<T>::value>;
-    
-    //
-    // See std::swap_ranges, except that this does not have the overload with ExecutionPolicy.
-    //
+
     template <typename ForwardIt1, typename ForwardIt2>
     constexpr auto swap_ranges(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2) noexcept
         -> ForwardIt2
@@ -61,10 +52,6 @@ namespace bml
         return first2;
     }
     
-    //
-    // See std::swap (overload for array types), except that this deduces array length as ptrdiff_t
-    // instead of size_t. If the array length is negative, the program is ill-formed.
-    //
     template <typename T, ::ptrdiff_t N>
     constexpr auto swap(T (&x)[N], T (&y)[N]) noexcept -> enable_if_ty<is_swappable<T>::value>
     {
@@ -78,31 +65,19 @@ namespace bml
         using check = decltype(swap(bml::declval<T>(), bml::declval<U>()));
     }
     
-    //
-    // See std::is_swappable_with.
-    //
     template <typename T, typename U>
     struct is_swappable_with : bool_constant<
            is_detected_v<detail::is_swappable_with_detail::check, T, U>
         && is_detected_v<detail::is_swappable_with_detail::check, U, T>>
     {};
     
-    //
-    // See std::is_swappable_with_v.
-    //
     template <typename T, typename U>
     inline constexpr auto is_swappable_with_v = bool(is_swappable_with<T, U>::value);
     
-    //
-    // See std::is_swappable.
-    //
     template <typename T>
     struct is_swappable
         : is_swappable_with<add_lvalue_reference_ty<T>, add_lvalue_reference_ty<T>> {};
     
-    //
-    // See std::is_swappable_v.
-    //
     template <typename T>
     inline constexpr auto is_swappable_v = bool(is_swappable<T>::value);
 }

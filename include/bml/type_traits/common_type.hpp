@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -19,10 +16,6 @@
 
 namespace bml
 {
-    //
-    // See std::common_type, as detailed in N4659's (the C++17 final working draft)
-    // [meta.trans.other].
-    //
     template <typename... Ts>
     struct common_type;
     
@@ -73,9 +66,6 @@ namespace bml
         is_detected_v<detail::common_type_detail::type_mem_alias, common_type<T1, T2>>,
         T1, T2, Ts...> {};
     
-    //
-    // See std::common_type_t, except that this is named common_type_ty for POSIX compatibility.
-    //
     template <typename... Ts>
     using common_type_ty = typename common_type<Ts...>::type;
 }

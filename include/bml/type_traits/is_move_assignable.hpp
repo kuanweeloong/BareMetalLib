@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -17,16 +14,10 @@
 
 namespace bml
 {
-    //
-    // See std::is_move_assignable.
-    //
     template <typename T>
     struct is_move_assignable : is_assignable<add_lvalue_reference_ty<T>,
         add_rvalue_reference_ty<T>> {};
     
-    //
-    // See std::is_move_assignable_v.
-    //
     template <typename T>
     inline constexpr auto is_move_assignable_v = bool(is_move_assignable<T>::value);
 }

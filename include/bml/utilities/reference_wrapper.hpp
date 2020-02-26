@@ -1,11 +1,8 @@
 //
 // Copyright (c) 2019 Wee Loong Kuan
 //
-// BareMetalLib is based on libc++ (https://libcxx.llvm.org/).
-// 
-// This file is licensed under under the Apache License v2.0 with LLVM Exceptions. For more details,
-// see the LICENSE.md file in the top-level directory of this distribution, or copy at 
-// https://llvm.org/LICENSE.txt.
+// Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
+// https://llvm.org/LICENSE.txt for license information.
 //
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
@@ -22,9 +19,6 @@
 
 namespace bml
 {
-    //
-    // See std::reference_wrapper.
-    //
     template <typename T>
     class reference_wrapper
     {
@@ -39,16 +33,8 @@ namespace bml
         
     public:
         
-        //
-        // Type alias which names the type being referenced.
-        //
         using type = T;
         
-        //
-        // Constructs a reference_wrapper. This does not participate in overload resolution if the
-        // argument is also a reference_wrapper wrapping the same type, or if the argument is not
-        // implicitly convertiable to T&, or if the argument is a temporary.
-        //
         template <typename U,
             typename = enable_if_ty<!is_same_v<remove_cvref_ty<U>, reference_wrapper>>,
             typename = decltype(FUN(bml::declval<U>()))>
@@ -56,22 +42,13 @@ namespace bml
             : m_ptr(bml::addressof(convert(bml::forward<U>(u))))
         {}
         
-        //
-        // Copy construction and assignment.
-        //
         constexpr reference_wrapper(reference_wrapper const& other) noexcept = default;
         constexpr auto operator=(reference_wrapper const& other) noexcept -> reference_wrapper&
             = default;
         
-        //
-        // Provides access to the stored reference.
-        //
         constexpr operator T&() const noexcept { return *m_ptr; }
         constexpr auto get() const noexcept -> T& { return *m_ptr; }
         
-        //
-        // Invokes the stored reference with the provided arguments.
-        //
         template <typename... Args>
         constexpr auto operator()(Args&&... args) const noexcept -> invoke_result_ty<T&, Args...>
         {
