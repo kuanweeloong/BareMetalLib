@@ -95,6 +95,17 @@ argument.
 ## Documentation
 BML's documentation can be found in the [`docs/`](docs/) directory, or [online][4].
 
+## Running Tests
+BML relies on CMake for testing. Whether tests are built or not is controlled by a single CMake
+option - `BML_BUILD_TESTS`.
+
+To run BML's tests on your own platform, run the following command (this assumes that
+`../BareMetalLib` is where the root of this repository is stored on your system):
+
+> ````
+> cmake -DBML_BUILD_TESTS=ON ../BareMetalLib && make && ctest
+> ````
+
 ## License
 BML's code is licensed under the [Apache 2.0 License with LLVM exceptions][5]. BML's documentation,
 which encompasses all content in the `docs/` directory, is licensed under [CC BY-SA 4.0][6].
