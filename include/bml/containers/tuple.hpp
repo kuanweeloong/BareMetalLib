@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 Wee Loong Kuan
+// Copyright (c) 2020 Wee Loong Kuan
 //
 // Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
 // https://llvm.org/LICENSE.txt for license information.
@@ -313,7 +313,8 @@ namespace bml
     template <::ptrdiff_t I, typename... Ts>
     struct tuple_element<I, tuple<Ts...>>
     {
-        static_assert(0 <= I && I < pack_size_v<Ts...>, "tuple index is out of bounds.");
+        static_assert(0 <= I && I < pack_size_v<Ts...>,
+            "tuple_element's index is out of bounds. (bml::tuple)");
         
         using type = type_pack_element_ty<I, Ts...>;
     };

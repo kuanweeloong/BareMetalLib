@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 Wee Loong Kuan
+// Copyright (c) 2020 Wee Loong Kuan
 //
 // Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
 // https://llvm.org/LICENSE.txt for license information.
@@ -8,6 +8,7 @@
 //
 
 #pragma once
+#include "containers/array.hpp"
 #include "containers/in_place.hpp"
 #include "containers/in_place_index.hpp"
 #include "containers/optional.hpp"

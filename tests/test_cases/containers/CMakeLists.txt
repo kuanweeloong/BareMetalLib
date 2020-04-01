@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019 Wee Loong Kuan
+# Copyright (c) 2020 Wee Loong Kuan
 #
 # Part of BareMetalLib, under the Apache License v2.0 with LLVM Exceptions. See
 # https://llvm.org/LICENSE.txt for license information.
@@ -41,10 +41,25 @@ bml_add_compile_failure_test("containers.optional.fail.reference"
     optional.fail.reference.cpp "optional cannot hold reference types.")
 bml_add_test("containers.tuple" tuple.cpp)
 bml_add_compile_failure_test("containers.tuple.fail.mem_get_invalid_index"
-    tuple.fail.mem_get_invalid_index.cpp "tuple index is out of bounds.")
+    tuple.fail.mem_get_invalid_index.cpp "tuple_element's index is out of bounds. \\(bml::tuple\\)")
 bml_add_compile_failure_test("containers.tuple.fail.free_get_invalid_index"
-    tuple.fail.free_get_invalid_index.cpp "tuple index is out of bounds.")
+    tuple.fail.free_get_invalid_index.cpp
+    "tuple_element's index is out of bounds. \\(bml::tuple\\)")
 bml_add_compile_failure_test("containers.tuple.fail.tuple_size_non_tuple"
     tuple.fail.tuple_size_non_tuple.cpp)
 bml_add_compile_failure_test("containers.tuple.fail.tuple_element_non_tuple"
     tuple.fail.tuple_element_non_tuple.cpp)
+bml_add_test("containers.array" array.cpp)
+bml_add_compile_failure_test("containers.array.fail.different_types_deduction"
+    array.fail.different_types_deduction.cpp)
+bml_add_compile_failure_test("containers.array.fail.neg_length" array.fail.neg_length.cpp
+    "Cannot have array of negative length.")
+bml_add_compile_failure_test("containers.array.fail.mem_get_invalid_index"
+    array.fail.mem_get_invalid_index.cpp "get's index is out of bounds. \\(bml::array\\)")
+bml_add_compile_failure_test("containers.array.fail.free_get_zero_length"
+    array.fail.free_get_zero_length.cpp)
+bml_add_compile_failure_test("containers.array.fail.free_get_invalid_index"
+    array.fail.free_get_invalid_index.cpp "get's index is out of bounds. \\(bml::array\\)")
+bml_add_compile_failure_test("containers.array.fail.tuple_element_invalid_index"
+    array.fail.tuple_element_invalid_index.cpp
+    "tuple_element's index is out of bounds. \\(bml::array\\)")

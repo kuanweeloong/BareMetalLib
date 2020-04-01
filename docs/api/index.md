@@ -13,6 +13,7 @@ This library contains basic non-keyword types (e.g. types similar to `std::nullp
 ## `containers`
 This library contains various object containers.
 
+- [`array`](containers/array.md)
 - [`in_place`](containers/in_place.md)
 - [`in_place_index`](containers/in_place_index.md)
 - [`optional`](containers/optional.md)
